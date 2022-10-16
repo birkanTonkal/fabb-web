@@ -13,18 +13,29 @@
 
 ## Context ( içerik (fayda kısmı) )
 
+Fabbapp is the free app that simplifies the reporting of community issues across Turkey. We’ve made reporting quick and easy which means when you see an issue while you’re out, user can let the responsible authority know with only a few taps.
+
+
+
 Report and view local problems. User can report any problem might see on the street e.g ( collapsed pavement, a broken tree branch or a dangerous gap ).
+
 
 
 
 ## Objective ( gerekçelendirme (hedef) ) // burada projenin neden lazım olduğunu ortaya koymak gerekir. Sayısal verileri içerimesi iyi olur. Sayısal veriler = literatür taraması
 
-Vatandaşları rahatsız eden, sosyal hizmet gerektiren sorunların yavaş çözüme kavuşması yada hiç düzelmemesi.
+
+
+Günümüzde insanların yaşam kalitesini düşüren temel sebeplerden bir tanesi çevre sorunlarıdır. Bu çevre sorunları, yollardaki çukurlar, devrilmiş ağaçlar, hatalı parklar, bozuk sokak lambaları, kirlenmiş içme suları gibi örneklendirilebilir. Ayrıca insanın hayatını tehlikeye atabilecek başıboş köpek sürüleri, açık rögar kapakları da olabilir. Adnan Menderes Üniversitesinin yaptığı araştırmaya göre, insanların %85'i çevre sorunlarına karşı duyarlıdır. Duyarlılık bu kadar yüksek oranda olmasına rağmen çevreyle alakalı sorunları ilgili kurumlara kolaylıkla bildirebilecekleri bir platform mevcut değildir. "appismi" ile çevresel sorunları, yerel yönetimle ve diğer insanlarla paylaşabilir ve bu sorunların daha hızlı çözülmesi için adım atabilir.
 
 
 
 ## Approach ( yaklaşım )
 
+
+
+
+## Proje sonrası beklenen sonuç ve etki
 
 
 

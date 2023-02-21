@@ -1,9 +1,10 @@
-const { db } = require("../firestore/index")
-const functions = require('firebase-functions');
+const { ref, set } = require('firebase/database');
+const { database } = require('../firebase/index');
 
-const userRef = db.collection('users')
-exports.getAllUsers = functions.https.onRequest((req, res) => {
-  
-  res.send("Hello");
-});
-
+exports.getAllUsers = async (req, res) => {
+    set(ref(database, 'users/' + 'userId'), {
+        username: 'za',
+        email: 'az',
+        profile_picture: 'xxx',
+    });
+};

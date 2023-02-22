@@ -1,9 +1,9 @@
-var express = require('express');
-
+const express = require('express');
 const UserController = require('../controllers/UserController');
+const validator = require('../validator/validator');
 
-var router = express.Router();
+const router = express.Router();
 
-router.get('/', UserController.getAllUsers);
+router.post('/create', validator.createUser, UserController.createUser);
 
 module.exports = router;

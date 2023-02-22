@@ -2,27 +2,7 @@ const {db, auth} = require('../firebase/database');
 const { validationResult } = require('express-validator');
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } = require('firebase/auth');
 
-/* const auth = getAuth();
 
-signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-    });
-
-signOut(auth)
-    .then(() => {
-        // Sign-out successful.
-    })
-    .catch((error) => {
-        // An error happened.
-    });
- */
 exports.createNewUser = async (req, res) => {
     const ref = db.ref('users');
     const errors = validationResult(req);
@@ -56,5 +36,9 @@ exports.createUser = async (req, res) => {
   .catch((error) => {
     res.send(error)
   });
+}
 
+
+exports.getUser = async (req, res) => {
+  res.send("selamlar")
 }

@@ -4,7 +4,7 @@ const validator = require('../validator/validator');
 
 const router = express.Router();
 
-router.post('/create', validator.createUser, UserController.createUser);
-router.get('/ali',UserController.getUser )
+router.post('/signup', validator.createUser, UserController.createUser);
+router.get('/signin', validator.getUserByEmailPassword, UserController.getUserByEmailPassword);
 
 module.exports = router;

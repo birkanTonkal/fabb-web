@@ -1,6 +1,5 @@
 const admin = require('firebase-admin');
 const firebaseCredentials = require('../serviceAccountKey.json');
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } = require('firebase/auth');
 
 const app = admin.initializeApp({
     credential: admin.credential.cert(firebaseCredentials),
@@ -8,9 +7,6 @@ const app = admin.initializeApp({
 });
 
 const db = admin.database();
-
 const auth = admin.auth();
 
-
-
-module.exports = {db, auth};
+module.exports = { db, auth };

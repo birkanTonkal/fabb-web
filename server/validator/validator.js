@@ -1,4 +1,4 @@
-const { body, validationResult } = require('express-validator');
+const { body, validationResult, param } = require('express-validator');
 
 exports.createUser = [
     body('email').notEmpty(),
@@ -9,3 +9,7 @@ exports.createUser = [
 ];
 
 exports.getUserByEmailPassword = [body('email').notEmpty(), body('password').notEmpty()];
+
+exports.getUserByUserId = [param('user_id').notEmpty()];
+
+exports.updateUser = [body('user_id').notEmpty()];

@@ -6,5 +6,8 @@ const router = express.Router();
 
 router.post('/signup', validator.createUser, UserController.createUser);
 router.get('/signin', validator.getUserByEmailPassword, UserController.getUserByEmailPassword);
+router.delete('/delete/', UserController.deleteUserByUserId);
+router.get('/:user_id', validator.getUserByUserId, UserController.getUserByUserId);
+router.put('/update', validator.updateUser, UserController.updateUser);
 
 module.exports = router;

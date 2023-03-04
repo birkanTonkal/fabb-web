@@ -22,12 +22,12 @@ function Login() {
         </div>
 
         <div className="login-right">
-          <div className="up">
+          <div className="login-up">
             <Logo className="logo" />
             <div className="title">Sign in to dashboard</div>
           </div>
 
-          <div className="middle">
+          <div className="login-middle">
             <div className="input-area">
               <label className="label">Email</label>
               <input placeholder="Type your email"/>
@@ -41,10 +41,10 @@ function Login() {
             <p className="forgotPassword">Forgot password ?</p>
           </div>
 
-          <div className="down">
+          <div className="login-down">
             <span>Don’t have an account ?</span>
             <span>
-              <a href="#">Apply for a new account</a>
+              <a href="./register">Apply for a new account</a>
             </span>
           </div>
         </div>

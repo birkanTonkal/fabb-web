@@ -1,21 +1,20 @@
 @import './variables';
 @import './base';
 
-.login-container {
+.register-container {
     display: flex;
     min-height: 100vh;
 
-    .login-right {
+    .register-right {
         background-color: $login-right-background;
         width: 60%;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        padding: 60px 0;
         align-items: center;
         box-shadow: -15px -4px 20px rgba(0, 0, 0, 0.3);
 
-        .login-up {
+        .register-up {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -27,25 +26,37 @@
             }
         }
 
-        .login-middle {
+        .register-middle {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            align-content: center;
-            margin: 50px 0;
-            width: 50%;
+            justify-content: space-evenly;
+            width: 100%;
+            margin: 20px 0;
 
-            .forgotPassword {
-                color: $gray;
-                font-size: 12px;
-                display: flex;
-                justify-content: end;
-                width: 100%;
-                text-decoration-line: underline;
+            .form-left, .form-right {
+                width: 40%;
+            }
+
+            input {
+                margin-bottom: 1.5em;
             }
         }
 
-        .login-down {
+        .apply-btn {
+            width: 40%;
+
+            p {
+                font-weight: 300;
+                font-size: 1.1em;
+                text-align: center;
+                
+                a {
+                    text-decoration: none;
+                    color: $gray;
+                }
+            }
+        }
+
+        .register-down {
             text-align: center;
             font-size: 1.3em;
 
@@ -69,12 +80,12 @@
 }
 
 @media (max-width: 800px) {
-    .login-container {
+    .register-container {
         display: flex;
         flex-direction: column-reverse;
         
         
-        .login-left {
+        .register-left {
             width: 100%;
             height: 10vh;
             
@@ -96,11 +107,14 @@
             }
         }
 
-        .login-right {
+        .register-right {
             width: 100%;
-            height: 90vh;
-            padding: 0;
-            justify-content: space-evenly;
+            height: 100vh;
+
+            .register-middle {
+                flex-direction: column;
+                align-items: center;
+            }
 
         }
     }

@@ -1,4 +1,5 @@
 const { db, auth } = require('../firebase/database');
+const admin = require('firebase-admin');
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 
@@ -12,10 +13,13 @@ exports.createIncident = async (req, res) => {
             category: req.body.category,
             description: req.body.description,
             location: req.body.location,
+            address: "",
             attachments: [],
+            report_number: '',
             upvote_count: req.body.upvote_count,
             downvote_count: req.body.downvote_count,
             incident_status: req.body.incident_status,
+            create_date: Date.now(),
         };
         let insertedData = ref.push(incidentData);
 

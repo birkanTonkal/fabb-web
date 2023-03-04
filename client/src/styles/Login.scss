@@ -105,12 +105,12 @@
         .login-left {
             width: 100%;
             min-height: 15vh;
-            padding: 5px 0;
 
             .texts {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                width: auto;
 
                 .text {
                     font-size: 2em;

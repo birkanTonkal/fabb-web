@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/Login.scss'
 import { useEffect } from 'react'
 import axios from 'axios'
-
+import LoginLeftPanel from '../components/LoginLeftPanel'
 function Login() {
 
 useEffect(() => {
@@ -16,6 +16,7 @@ const login = async () => {
   return (
     <>
     <div className='login-container'>
+      <LoginLeftPanel />
         <input className="logind-header">asdasdasd</input>
     </div>
     <button onClick={login}>submit</button>

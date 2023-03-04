@@ -109,11 +109,20 @@
 
         .register-right {
             width: 100%;
-            height: 100vh;
+            min-height: 90vh;
+            padding: 20px 0;
 
             .register-middle {
                 flex-direction: column;
                 align-items: center;
+
+                .form-left, .form-right {
+                    width: 60%;
+                }
+            }
+
+            .apply-btn {
+                width: 60%;
             }
 
         }

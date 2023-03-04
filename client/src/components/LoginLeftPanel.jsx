@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
 function LoginLeftPanel() {
   return (
-    <div>LoginLeftPanel</div>
-  )
+    <>
+      <div className="texts">
+        <div className="text">Join Our Community</div>
+        <div className="fabb-text">Made by ● Fabbsoft</div>
+      </div>
+    </>
+  );
 }
 
-export default LoginLeftPanel
+export default LoginLeftPanel;

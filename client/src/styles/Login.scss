@@ -39,7 +39,8 @@
         width: 60%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
+        padding: 60px 0;
         align-items: center;
         box-shadow: -15px -4px 20px rgba(0, 0, 0, 0.3);
 
@@ -48,7 +49,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-bottom: 100px;
 
             .logo {
                 margin-bottom: 20px;
@@ -61,7 +61,7 @@
             flex-direction: column;
             align-items: center;
             align-content: center;
-            margin-bottom: 120px;
+            margin: 50px 0;
             width: 50%;
 
             .forgotPassword {
@@ -105,28 +105,31 @@
         
         .login-left {
             width: 100%;
-            min-height: 10vh;
+            height: 10vh;
             
             .texts {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 width: auto;
+                text-align: center;
 
                 .text {
-                    font-size: 2em;
+                    font-size: 1.7em;
                     margin: 0;
+                }
+
+                .fabb-text {
+                    font-size: 1em;
                 }
             }
         }
 
         .login-right {
             width: 100%;
-            min-height: 90vh;
+            height: 90vh;
+            padding: 0;
 
-            .up, .middle {
-                margin-bottom: 50px;
-            }
         }
     }
 }

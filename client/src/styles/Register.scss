@@ -28,16 +28,22 @@
 
         .register-middle {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
             width: 100%;
             margin: 20px 0;
 
             .form-left, .form-right {
-                width: 40%;
+                width: 30%;
+                margin: 0 10px;
             }
 
             input {
                 margin-bottom: 1.5em;
+                text-indent: 15px;
+                border-bottom: none;
+                background-color: #ffffff;
+                border-radius: 3px;
+                
             }
         }
 

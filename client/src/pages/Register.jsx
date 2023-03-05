@@ -30,31 +30,25 @@ function Register() {
           <div className="register-middle">
             <div className="form-left">
               <div className="input-area">
-                <label className="label">Name</label>
-                <input placeholder="Type your name" />
+                <input placeholder="Name" />
               </div>
               <div className="input-area">
-                <label className="label">Surname</label>
-                <input placeholder="Type your surname" />
+                <input placeholder="Phone number" />
               </div>
               <div className="input-area">
-                <label className="label">Phone</label>
-                <input placeholder="Type your phone" />
+                <input placeholder="Password" />
               </div>
             </div>
 
             <div className="form-right">
               <div className="input-area">
-                <label className="label">Email</label>
-                <input placeholder="Type your email" />
+                <input placeholder="Surname" />
               </div>
               <div className="input-area">
-                <label className="label">Password</label>
-                <input placeholder="Type your password" />
+              <input placeholder="Email" />
               </div>
               <div className="input-area">
-                <label className="label">Confirm password</label>
-                <input placeholder="Type your password" />
+                <input placeholder="Confirm password" />
               </div>
             </div>
           </div>
@@ -62,8 +56,14 @@ function Register() {
           <div className="apply-btn">
             <button onClick={register}>Apply</button>
             <p>
-              By creating an account with FABB, you agree to the <a href="#"><b>Terms and
-              Conditions</b></a> and <a href="#"><b>Privacy Policy</b></a>
+              By creating an account with FABB, you agree to the{" "}
+              <a href="#">
+                <b>Terms and Conditions</b>
+              </a>{" "}
+              and{" "}
+              <a href="#">
+                <b>Privacy Policy</b>
+              </a>
             </p>
           </div>
 

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import LoginLeftPanel from "../components/LoginLeftPanel";
 import Logo from "../assets/logo";
+import { HiUser } from "react-icons/hi";
 
 function Login() {
   useEffect(() => {}, []);
@@ -29,15 +30,13 @@ function Login() {
 
           <div className="login-middle">
             <div className="input-area">
-              <label className="label">Email</label>
-              <input placeholder="Type your email"/>
+              <input type="text" placeholder="Email" id="email-input"/>
             </div>
             <div className="input-area">
-              <label className="label">Password</label>
-              <input placeholder="Type your password" />
+              <input placeholder="Password" id="password-input"/>
             </div>
 
-            <button onClick={login}>Login</button>
+            <button onClick={login} className="login-btn">Login</button>
             <p className="forgotPassword">Forgot password ?</p>
           </div>
 
@@ -49,8 +48,6 @@ function Login() {
           </div>
         </div>
       </div>
-
-      
     </>
   );
 }

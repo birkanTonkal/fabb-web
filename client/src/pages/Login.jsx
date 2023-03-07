@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Login.scss";
 import { useEffect } from "react";
 import axios from "axios";
 import LoginLeftPanel from "../components/LoginLeftPanel";
 import Logo from "../assets/logo";
 import { HiUser } from "react-icons/hi";
+import { config } from "../helpers/Constants";
 
 function Login() {
-  useEffect(() => {}, []);
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
 
   const login = async () => {
+    console.log(email, password)
     const userCredentials = await axios.get(
-      "http://localhost:5111/user/signin?email=deneme@gmail.com&password=deneme"
+      `${config.URL}/user/signin?email=${email}&password=${password}`
     );
     console.log(userCredentials.data);
   };
@@ -30,10 +33,10 @@ function Login() {
 
           <div className="login-middle">
             <div className="input-area">
-              <input type="text" placeholder="Email" id="email-input"/>
+              <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} id="email-input"/>
             </div>
             <div className="input-area">
-              <input placeholder="Password" id="password-input"/>
+              <input placeholder="Password" onChange={(e) => setPassword(e.target.value)} id="password-input"/>
             </div>
 
             <button onClick={login} className="login-btn">Login</button>

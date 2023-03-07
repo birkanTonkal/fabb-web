@@ -31,6 +31,7 @@ exports.createUser = async (req, res) => {
             liked_incidents: [''],
             disliked_incidents: [''],
             location: { longtitude: 0, latitude: 0 },
+            create_date: Date.now(),
         };
 
         let insertedData = ref.push(newUser, (error) => {

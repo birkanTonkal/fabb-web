@@ -13,11 +13,10 @@ exports.createIncident = async (req, res) => {
             category: req.body.category,
             description: req.body.description,
             location: req.body.location,
-            address: "",
+            address: '',
             attachments: [],
             report_number: '',
-            upvote_count: req.body.upvote_count,
-            downvote_count: req.body.downvote_count,
+            vote_counts: { upvote_count: req.body.upvote_count, downvote_count: req.body.downvote_count },
             incident_status: req.body.incident_status,
             create_date: Date.now(),
         };

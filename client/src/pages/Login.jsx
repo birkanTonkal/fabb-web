@@ -1,23 +1,34 @@
 import React, { useState } from "react";
-import "../styles/Login.scss";
-import { useEffect } from "react";
 import axios from "axios";
 import LoginLeftPanel from "../components/LoginLeftPanel";
+
+import { useDispatch } from 'react-redux'
+import { loginUser } from "../slices/authSlice";
 import Logo from "../assets/logo";
-import { HiUser } from "react-icons/hi";
-import { config } from "../helpers/Constants";
+import "../styles/Login.scss";
+import { config } from "../utils/Constants";
+import { useNavigate } from "react-router";
+
 
 function Login() {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const login = async () => {
-    console.log(email, password)
     const userCredentials = await axios.get(
       `${config.URL}/user/signin?email=${email}&password=${password}`
     );
     console.log(userCredentials.data);
+    if (userCredentials.status === 200) {
+      const userData = Object.values(userCredentials.data)[0]
+      dispatch(loginUser(userData))
+      navigate('/dashboard', { replace: true });
+    }
   };
+
+
   return (
     <>
       <div className="login-container">

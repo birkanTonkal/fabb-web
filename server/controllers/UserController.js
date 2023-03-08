@@ -27,6 +27,7 @@ exports.createUser = async (req, res) => {
             full_name: userRecord.displayName,
             phone_number: userRecord.phoneNumber,
             email: userRecord.email,
+            user_type: "normal",
             incidents: [''],
             liked_incidents: [''],
             disliked_incidents: [''],

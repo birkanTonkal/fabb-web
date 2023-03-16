@@ -2,114 +2,40 @@
 @import './base';
 
 .login-container {
-    display: flex;
-    min-height: 100vh;
-
+    
     .login-right {
-        background-color: $login-right-background;
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        padding: 60px 0;
-        align-items: center;
-        box-shadow: -15px -4px 20px rgba(0, 0, 0, 0.3);
-
-        .login-up {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            .logo {
-                margin-bottom: 20px;
-                filter: drop-shadow(3px 2px 2px rgba(0, 0, 0, 0.25));
-            }
-        }
-
-        .login-middle {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            align-content: center;
+        justify-content: space-around;
+        padding: 40px 0;
+        
+        Form {
             margin: 50px 0;
-            width: 40%;
+            width: 300px;
 
-            .forgotPassword {
-                color: $gray;
-                font-size: 12px;
+            &>* {
+                width: 100%;
+            }
+
+            .ant-input-prefix {
+                margin: 0 7px 0 0;
+            }
+
+            .login-input {
+                background: none;
+    
+                &>* {
+                    background: none;
+                }
+            }
+
+            .login-form-button {
+                margin: 20px 0 8px 0;
+                width: 100%;
+            }
+
+            .login-form-forgot {
                 display: flex;
                 justify-content: end;
-                width: 100%;
-                text-decoration-line: underline;
             }
-        }
-
-        .login-down {
-            text-align: center;
-            font-size: 1.3em;
-
-            span:first-child {
-                color: $gray;
-                font-weight: 700;
-                margin-right: 5px;
-            }
-
-            span:nth-child(2) {
-                margin-left: 5px;
-
-                a {
-                    color: #406882;
-                    text-decoration-line: underline;
-                }
-
-            }
-        }
-    }
-
-    input#email-input {
-        background-image: url(../assets/user.png);
-    }
-
-    input#password-input {
-        background-image: url(../assets/password.png);
-    }
-}
-
-@media (max-width: 800px) {
-    .login-container {
-        display: flex;
-        flex-direction: column-reverse;
-
-
-        .login-left {
-            width: 100%;
-            height: 10vh;
-
-            .texts {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: auto;
-                text-align: center;
-
-                .text {
-                    font-size: 1.7em;
-                    margin: 0;
-                }
-
-                .fabb-text {
-                    font-size: 1em;
-                }
-            }
-        }
-
-        .login-right {
-            width: 100%;
-            height: 90vh;
-            padding: 0;
-            justify-content: space-evenly;
-
-        }
+        }        
     }
 }

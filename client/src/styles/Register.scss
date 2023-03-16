@@ -2,135 +2,40 @@
 @import './base';
 
 .register-container {
-    display: flex;
-    min-height: 100vh;
 
     .register-right {
-        background-color: $login-right-background;
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        box-shadow: -15px -4px 20px rgba(0, 0, 0, 0.3);
+        justify-content: center;
+        padding-top: 40px;
 
-        .register-up {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        Form {
+            width: 450px;
+            margin: 40px 0 20px 0;
 
-            .logo {
-                margin-bottom: 20px;
-                filter: drop-shadow(3px 2px 2px rgba(0, 0, 0, 0.25));
-            }
-        }
-
-        .register-middle {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin: 20px 0;
-
-            .form-left, .form-right {
-                width: 30%;
-                margin: 0 10px;
-            }
-
-            input {
-                margin-bottom: 1.5em;
-                text-indent: 15px;
-                border-bottom: none;
-                background-color: #ffffff;
-                border-radius: 3px;
-                
-            }
-        }
-
-        .apply-btn {
-            width: 40%;
-
-            p {
-                font-weight: 300;
-                font-size: 1.1em;
-                text-align: center;
-                
-                a {
-                    text-decoration: none;
-                    color: $gray;
-                }
-            }
-        }
-
-        .register-down {
-            text-align: center;
-            font-size: 1.3em;
-
-            span:first-child {
-                color: $gray;
-                font-weight: 700;
-                margin-right: 5px;
-            }
-
-            span:nth-child(2) {
-                margin-left: 5px;
-
-                a {
-                    color: #406882;
-                    text-decoration-line: underline;
-                }
-
-            }
-        }
-    }
-}
-
-@media (max-width: 800px) {
-    .register-container {
-        display: flex;
-        flex-direction: column-reverse;
-        
-        
-        .register-left {
-            width: 100%;
-            height: 10vh;
-            
-            .texts {
+            .ant-form-item-required {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: auto;
-                text-align: center;
-
-                .text {
-                    font-size: 1.7em;
-                    margin: 0;
-                }
-
-                .fabb-text {
-                    font-size: 1em;
-                }
+                text-align: left;
             }
-        }
 
-        .register-right {
-            width: 100%;
-            min-height: 90vh;
-            padding: 40px 0;
+            .btn {
+                display: flex;
+                justify-content: center;
 
-            .register-middle {
-                flex-direction: column;
-                align-items: center;
-
-                .form-left, .form-right {
+                .register-form-button {
                     width: 60%;
                 }
             }
+        }
 
-            .apply-btn {
-                width: 60%;
+        .docs {
+            font-weight: 300;
+            font-size: 1.2em;
+            text-align: center;
+            width: 40%;
+
+            a {
+                text-decoration: none;
+                color: $gray;
             }
-
         }
     }
 }

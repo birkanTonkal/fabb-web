@@ -1,7 +1,7 @@
-import { Routes, Route } from "react-router-dom"
-import Dashboard from "./pages/Dashboard"
+import { Routes, Route, useNavigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import Dashboard from "./components/Dashboard"
 
 
 function App() {

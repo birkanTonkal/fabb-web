@@ -9,5 +9,7 @@ router.get('/signin', validator.getUserByEmailPassword, UserController.getUserBy
 router.delete('/delete/', UserController.deleteUserByUserId);
 router.get('/:user_id', validator.getUserByUserId, UserController.getUserByUserId);
 router.put('/update', validator.updateUser, UserController.updateUser);
+router.get('/verify/:email', UserController.verifyUserSession);
+router.get('/logout/:email', UserController.logoutUser)
 
 module.exports = router;

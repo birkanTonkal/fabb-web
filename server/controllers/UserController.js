@@ -55,6 +55,7 @@ exports.createUser = async (req, res) => {
     }
 };
 
+
 exports.getUserByEmailPassword = async (req, res) => {
     /* const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -69,13 +70,43 @@ exports.getUserByEmailPassword = async (req, res) => {
                 password: req.query.password,
             }
         );
+        revokeToken(req.query.email)
         const account_id = accountData.data.localId;
+       
         const user = await searchByField(ref, account_id, 'account_id');
+       
+    
         res.send(user);
     } catch (err) {
         res.status(400).send(err);
     }
 };
+
+exports.verifyUserSession = async (req, res) => {
+
+    auth.getUserByEmail(req.params.email)
+  .then(function(userRecord) {
+    console.log(userRecord)
+    const tokenValidTime =  new Date(userRecord.tokensValidAfterTime)
+    tokenValidTime.setHours(tokenValidTime.getHours() + 3);
+    const currentDate = new Date().getTime()
+    res.send(currentDate < tokenValidTime);
+  })   
+}
+
+function revokeToken(email) {
+    auth.getUserByEmail(email)
+    .then(function(userRecord) {
+      let userUid =  userRecord.uid
+      auth.revokeRefreshTokens(userUid).then((res) => {
+
+      })      
+    })
+}
+
+exports.logoutUser = async (req, res) => {
+    revokeToken(req.params.email)
+}
 
 exports.getUserByUserId = async (req, res) => {
     const errors = validationResult(req);
@@ -142,3 +173,5 @@ function searchByField(ref, fieldValue, fieldName) {
             return snapshot.val();
         });
 }
+
+

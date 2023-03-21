@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../styles/Register.scss";
 import { useEffect } from "react";
+import { useNavigate } from  'react-router-dom';
 import axios from "axios";
 import LoginLeftPanel from "../components/LoginLeftPanel";
+import { config } from "../utils/Constants";
 import Logo from "../assets/logo";
 
 import {
@@ -14,12 +16,25 @@ import {
 import { Button, Form, Input, Divider } from "antd";
 
 function Register() {
-  useEffect(() => {}, []);
+  const firstNameField = useRef(null);
+  const secondNameField = useRef(null);
+  const emailField = useRef(null);
+  const passwordField = useRef(null);
+  const phoneField = useRef(null);
+  const navigate = useNavigate()
 
   const register = async () => {
-    const userCredentials = await axios.get(
-      "http://localhost:5111/user/signin?email=deneme@gmail.com&password=deneme"
+    const userCredentials = await axios.post(
+      `${config.URL}/user/signup`, {
+        email: emailField.current.input.value,
+        password: passwordField.current.input.value,
+        phone_number:"+90" +  phoneField.current.input.value,
+        full_name: firstNameField.current.input.value + '' + secondNameField.current.input.value
+      }
     );
+   /*  if(userCredentials?.data?.user_id) {
+      navigate('/login')
+    } */
     console.log(userCredentials.data);
   };
 
@@ -52,7 +67,7 @@ function Register() {
                 },
               ]}
             >
-              <Input className="register-input" placeholder="Type your name" />
+              <Input className="register-input" placeholder="Type your name" ref={firstNameField}/>
             </Form.Item>
 
             <Form.Item
@@ -69,6 +84,7 @@ function Register() {
               <Input
                 className="register-input"
                 placeholder="Type your surname"
+                ref={secondNameField}
               />
             </Form.Item>
 
@@ -83,7 +99,7 @@ function Register() {
                 },
               ]}
             >
-              <Input className="register-input" placeholder="Type your email" />
+              <Input className="register-input" placeholder="Type your email" ref={emailField} />
             </Form.Item>
 
             <Form.Item
@@ -97,7 +113,7 @@ function Register() {
                 },
               ]}
             >
-              <Input className="register-input" addonBefore={"+90"} placeholder="( _ _ _ ) _ _ _  _ _ _ _" />
+              <Input className="register-input" addonBefore={"+90"} ref={phoneField} placeholder="( _ _ _ ) _ _ _  _ _ _ _" />
             </Form.Item>
 
             <Form.Item
@@ -114,6 +130,7 @@ function Register() {
               <Input.Password
                 className="register-input"
                 placeholder="Type your password"
+                ref={passwordField}
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
@@ -141,7 +158,7 @@ function Register() {
             </Form.Item>
 
             <div className="btn">
-              <Button className="register-form-button" htmlType="submit">Apply</Button>
+              <Button className="register-form-button" htmlType="submit" onClick={() => {register()}}>Apply</Button>
             </div>
           </Form>
 

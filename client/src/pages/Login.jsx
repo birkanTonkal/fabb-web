@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import LoginLeftPanel from "../components/LoginLeftPanel";
+import { useRef } from 'react';
 import { useDispatch } from "react-redux";
 
 import { loginUser } from "../slices/authSlice";
@@ -18,12 +19,14 @@ import {
 import { Button, Form, Input, Divider } from "antd";
 
 function Login() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const emailField = useRef(null)
+  const passwordField = useRef(null)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const login = async () => {
+    const email = emailField.current.input.value;
+    const password = passwordField.current.input.value
     const userCredentials = await axios.get(
       `${config.URL}/user/signin?email=${email}&password=${password}`
     );
@@ -60,6 +63,7 @@ function Login() {
               className="login-input"
               size="large"
               placeholder="Email"
+              ref={emailField}
               prefix={<UserOutlined />}
             />
           </Form.Item>
@@ -78,6 +82,7 @@ function Login() {
               prefix={<LockOutlined />}
               placeholder="Password"
               size="large"
+              ref={passwordField}
               iconRender={(visible) =>
                 visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
               }
@@ -85,7 +90,7 @@ function Login() {
           </Form.Item>
 
           <Form.Item>
-            <Button className="login-form-button" htmlType="submit">
+            <Button className="login-form-button" onClick={() => login()} htmlType="submit">
               Login
             </Button>
             <a className="login-form-forgot" href="">

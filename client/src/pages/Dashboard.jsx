@@ -78,13 +78,13 @@ function Dashboard() {
       </Sider>
 
       <Layout className="layout-right-area">
-        <Header className="header"> </Header>
+        <Header className="header">{dashboardState.currentPage}</Header>
 
         <Content className="content">
          <RenderPage />
         </Content>
 
-        <Footer className="footer">Made by FabbSoft ©2023</Footer>
+        {/* <Footer className="footer">Made by FabbSoft ©2023</Footer> */}
       </Layout>
     </Layout>
   );

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "../styles/Register.scss";
 import { useEffect } from "react";
-import { useNavigate } from  'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginLeftPanel from "../components/LoginLeftPanel";
 import { config } from "../utils/Constants";
@@ -21,21 +21,27 @@ function Register() {
   const emailField = useRef(null);
   const passwordField = useRef(null);
   const phoneField = useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const register = async () => {
-    const userCredentials = await axios.post(
-      `${config.URL}/user/signup`, {
-        email: emailField.current.input.value,
-        password: passwordField.current.input.value,
-        phone_number:"+90" +  phoneField.current.input.value,
-        full_name: firstNameField.current.input.value + '' + secondNameField.current.input.value
-      }
-    );
-   /*  if(userCredentials?.data?.user_id) {
+    const userCredentials = await axios.post(`${config.URL}/user/signup`, {
+      email: emailField.current.input.value,
+      password: passwordField.current.input.value,
+      phone_number: "+90" + phoneField.current.input.value,
+      full_name:
+        firstNameField.current.input.value +
+        "" +
+        secondNameField.current.input.value,
+    });
+    /*  if(userCredentials?.data?.user_id) {
       navigate('/login')
     } */
     console.log(userCredentials.data);
+  };
+
+  const [form] = Form.useForm();
+  const onFinish = (values) => {
+    form.resetFields();
   };
 
   return (
@@ -49,9 +55,11 @@ function Register() {
           <div className="register-up">
             {/* <Logo className="logo" /> */}
             <div className="title">Apply to the system</div>
-          </div>         
+          </div>
 
           <Form
+            onFinish={onFinish}
+            form={form}
             labelCol={{
               span: 8,
             }}
@@ -67,7 +75,11 @@ function Register() {
                 },
               ]}
             >
-              <Input className="register-input" placeholder="Type your name" ref={firstNameField}/>
+              <Input
+                className="register-input"
+                placeholder="Type your name"
+                ref={firstNameField}
+              />
             </Form.Item>
 
             <Form.Item
@@ -99,7 +111,11 @@ function Register() {
                 },
               ]}
             >
-              <Input className="register-input" placeholder="Type your email" ref={emailField} />
+              <Input
+                className="register-input"
+                placeholder="Type your email"
+                ref={emailField}
+              />
             </Form.Item>
 
             <Form.Item
@@ -113,7 +129,12 @@ function Register() {
                 },
               ]}
             >
-              <Input className="register-input" addonBefore={"+90"} ref={phoneField} placeholder="( _ _ _ ) _ _ _  _ _ _ _" />
+              <Input
+                className="register-input"
+                addonBefore={"+90"}
+                ref={phoneField}
+                placeholder="( _ _ _ ) _ _ _  _ _ _ _"
+              />
             </Form.Item>
 
             <Form.Item
@@ -158,7 +179,15 @@ function Register() {
             </Form.Item>
 
             <div className="btn">
-              <Button className="register-form-button" htmlType="submit" onClick={() => {register()}}>Apply</Button>
+              <Button
+                className="register-form-button"
+                htmlType="submit"
+                onClick={() => {
+                  register();
+                }}
+              >
+                Apply
+              </Button>
             </div>
           </Form>
 

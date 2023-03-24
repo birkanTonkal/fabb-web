@@ -1,0 +1,23 @@
+:where(.css-dev-only-do-not-override-ph9edi).ant-badge.ant-badge-status .ant-badge-status-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 5px;
+}
+
+.vote-icons {
+    display: flex;
+    
+    .like {
+        width: 65px;
+    }
+
+    .like-icon {
+        color: rgba(51, 174, 16, 1);
+        margin-right: 5px;
+    }
+
+    .dislike-icon {
+        color: rgba(232, 83, 66, 1);
+        margin-right: 5px;
+    }
+}

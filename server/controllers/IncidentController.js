@@ -3,6 +3,8 @@ const admin = require('firebase-admin');
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 
+
+let startAtRef = null
 exports.createIncident = async (req, res) => {
     try {
         const ref = db.ref('incidents');
@@ -15,10 +17,10 @@ exports.createIncident = async (req, res) => {
             location: req.body.location,
             address: '',
             attachments: [],
-            report_number: '',
+            report_number: req.body.report_number || "",
             vote_counts: { upvote_count: req.body.upvote_count, downvote_count: req.body.downvote_count },
             incident_status: req.body.incident_status,
-            create_date: Date.now(),
+            create_date: new Date().toLocaleDateString(),
         };
         let insertedData = ref.push(incidentData);
 
@@ -37,15 +39,26 @@ exports.createIncident = async (req, res) => {
 
 exports.getAllIncidents = async (req, res) => {
     try {
+        const limit = parseInt(req.query.limit) || 30;
         const ref = db.ref('incidents');
+        const orderBy = req.query.orderBy || "create_date"
+ /*        console.log(limit)
+        if (startAtRef !== null) {  ref = db.ref('incidents').orderByChild(orderBy).startAfter(startAtRef).limitToFirst(limit) }
+        else { ref = db.ref('incidents').orderByChild(orderBy).limitToFirst(limit) }
+        
+        console.log(ref) */
+       
         await ref.once('value', (data) => {
             if (data) {
+                startAtRef = data
+                console.log(data.val())
                 res.send(data.val());
             } else {
                 res.status(500).send('fail oldu be naparsin >)');
             }
         });
     } catch (err) {
+        console.log(err)
         res.status(500).send(err);
     }
 };

@@ -60,9 +60,17 @@ function Dashboard() {
     <Layout className="container">
       <Sider
         className="layout-left-area"
-        collapsible
+        //collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          bottom: 0,
+        }}
       >
         <div className="logo-area">
           <Logo className="logo" />
@@ -77,7 +85,7 @@ function Dashboard() {
         />
       </Sider>
 
-      <Layout className="layout-right-area">
+      <Layout className="layout-right-area" >
         <Header className="header">{dashboardState.currentPage}</Header>
 
         <Content className="content">

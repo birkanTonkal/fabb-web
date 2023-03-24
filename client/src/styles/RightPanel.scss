@@ -1,0 +1,44 @@
+@import './variables';
+
+.ant-drawer-title {
+    font-size: 18px !important;
+    color: $gray !important;
+    letter-spacing: 0.7px !important;
+    font-weight: bold !important;
+}
+
+.info-area {
+    margin-bottom: 30px !important;
+    font-size: 16px;
+
+    & :first-child {
+        font-weight: 500;
+        color: #3F3F3F;
+    }
+
+    p {
+        margin: 10px;
+        color: #666666;
+
+    }
+
+    .status {
+        cursor: pointer;
+    }
+}
+
+.ant-drawer-body {
+    padding: 15px 24px !important;
+}
+
+.report-number {
+    background: #FFFFFF;
+    border: 1px solid #8F8F8F;
+    border-radius: 20px;
+    width: 170px;
+    height: 37px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 13px;
+}

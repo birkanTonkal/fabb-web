@@ -39,7 +39,6 @@ function Login() {
 
     message.success("Successful");
     message.config({
-      top: 10,
       duration: 2,
     });
   };

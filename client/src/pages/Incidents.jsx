@@ -125,17 +125,18 @@ function Incidents() {
     {
       title: "Report Number",
       dataIndex: "report_number",
-      width: "20%",
     },
     {
       title: "Category",
       dataIndex: "category",
       sorter: (a, b) => a.category.localeCompare(b.category),
+      width: "16.66%",
     },
     {
       title: "Title",
       dataIndex: "title",
       sorter: (a, b) => a.title.localeCompare(b.title),
+      width: "16.66%",
     },
     {
       title: "Date",
@@ -143,6 +144,7 @@ function Incidents() {
       sorter: (a, b) => 
         new Date(...a.create_date.split("-").reverse()) -
         new Date(...b.create_date.split("-").reverse()),
+      width: "16.66%",
     },
     {
       title: "Votes",
@@ -154,6 +156,7 @@ function Incidents() {
           <div className="dislike"><DislikeOutlined  className="dislike-icon"/>{votes.downvote_count}</div>
         </div>
       ),
+      width: "16.66%",
     },
     {
       title: "Status",
@@ -176,22 +179,24 @@ function Incidents() {
           value: "Rejected",
         },
       ],
+      width: "16.66%",
+      editable: true,
       onFilter: (value, record) => { return record.incident_status[0] == value },
-      render: (status) => (
+      render: (status) => (       
         <>
           {status.map((tag) => {
             if (tag === "Opened") {
-              return <Badge status="default" text="Opened" />;
+              return <Badge status="default" text={tag} />;
             } else if (tag === "In Progress") {
-              return <Badge status="In Progress" text="In Progress" />;
+              return <Badge status="processing" text={tag} />;
             } else if (tag === "Solved") {
-              return <Badge status="success" text="Solved" />;
+              return <Badge status="success" text={tag} />;
             } else if (tag === "Rejected") {
-              return <Badge status="error" text="Rejected" />;
+              return <Badge status="error" text={tag} />;
             }
           })}
         </>
-      ),
+      ),      
     },
 ];
   const [incidentData, setIncidentData] = useState([])
@@ -226,6 +231,7 @@ function Incidents() {
   return (
     <>
     <Table
+      className="incident-table"
       columns={columns}
       dataSource={incidentData}
       onRow={(record, rowIndex) => {
@@ -237,7 +243,7 @@ function Incidents() {
         y: 440,
       }} */
       pagination={{
-        pageSize: 7,
+        pageSize: 12,
       }}
     />
     <RightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData}/>

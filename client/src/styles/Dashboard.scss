@@ -12,9 +12,10 @@
     }
 
     .layout-right-area {
+        margin-left: 80px;
         .header {
             background-color: white;
-            line-height: 70px;
+            line-height: 55px;
             height: 55px;
             font-size: 18px;
             color: $gray;
@@ -39,4 +40,8 @@
 .ant-layout-sider-children,
 .ant-menu {
     background-color: $dark-blue;
+}
+
+.ant-layout-content {
+    //background: #FAFBFD;
 }

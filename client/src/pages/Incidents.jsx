@@ -1,12 +1,14 @@
 import { Table, Badge } from "antd";
+import axios from "axios";
 import "../styles/Incidents.scss";
-
+import RightPanel from "../components/RightPanel";
 import {
   LikeOutlined,
   DislikeOutlined
 } from "@ant-design/icons";
-
-const data = [
+import { useState, useEffect } from 'react';
+import { config } from "../utils/Constants";
+/* const data = [
   {
     key: "1",
     reportnumber: "AC-23478-83746",
@@ -115,13 +117,14 @@ const data = [
     votes: [-7, 35],
     status: ["Rejected"],
   },
-];
+]; */
 
 function Incidents() {
+
   const columns = [
     {
       title: "Report Number",
-      dataIndex: "reportnumber",
+      dataIndex: "report_number",
       width: "20%",
     },
     {
@@ -136,25 +139,25 @@ function Incidents() {
     },
     {
       title: "Date",
-      dataIndex: "date",
-      sorter: (a, b) =>
-        new Date(...a.date.split("-").reverse()) -
-        new Date(...b.date.split("-").reverse()),
+      dataIndex: "create_date",
+      sorter: (a, b) => 
+        new Date(...a.create_date.split("-").reverse()) -
+        new Date(...b.create_date.split("-").reverse()),
     },
     {
       title: "Votes",
-      dataIndex: "votes",
-      sorter: (a, b) => a.votes[0] + a.votes[1] - (b.votes[0] + b.votes[1]),
+      dataIndex: "vote_counts",
+      sorter: (a, b) => a.vote_counts.upvote_count,
       render: (votes) => (
         <div className="vote-icons">
-          <div className="like"><LikeOutlined className="like-icon"/>{votes[1]}</div>
-          <div className="dislike"><DislikeOutlined  className="dislike-icon"/>{votes[0]}</div>
+          <div className="like"><LikeOutlined className="like-icon"/>{votes.upvote_count}</div>
+          <div className="dislike"><DislikeOutlined  className="dislike-icon"/>{votes.downvote_count}</div>
         </div>
       ),
     },
     {
       title: "Status",
-      dataIndex: "status",
+      dataIndex: "incident_status",
       filters: [
         {
           text: "Opened",
@@ -173,14 +176,14 @@ function Incidents() {
           value: "Rejected",
         },
       ],
-      onFilter: (value, record) => record.status.toString().startsWith(value),
+      onFilter: (value, record) => { return record.incident_status[0] == value },
       render: (status) => (
         <>
           {status.map((tag) => {
             if (tag === "Opened") {
               return <Badge status="default" text="Opened" />;
             } else if (tag === "In Progress") {
-              return <Badge status="processing" text="In Progress" />;
+              return <Badge status="In Progress" text="In Progress" />;
             } else if (tag === "Solved") {
               return <Badge status="success" text="Solved" />;
             } else if (tag === "Rejected") {
@@ -190,19 +193,55 @@ function Incidents() {
         </>
       ),
     },
-  ];
+];
+  const [incidentData, setIncidentData] = useState([])
+  const [toggleDrawer, setToggleDrawer] = useState(false);
+  const [incidentDetailData, setincidentDetailData] = useState({})
+
+  const fetchIncidentData = async () => {
+    const res = await axios.get(
+      `${config.URL}/incident`
+    );
+    let incidents = res.data
+    let fixedList = [];
+    //console.log(res.data)
+    let key = 0
+    for(const incidentId in incidents) {
+      incidents[incidentId].incident_status =[incidents[incidentId].incident_status]
+      incidents[incidentId].key = key
+      fixedList.push(incidents[incidentId])
+      key += 1
+    }
+    setIncidentData(fixedList)
+     
+  }
+  useEffect( () => {
+    fetchIncidentData();
+  }, [])
+  
+  const showDrawer = () => {
+    setToggleDrawer(!toggleDrawer);
+  };
 
   return (
+    <>
     <Table
       columns={columns}
-      dataSource={data}
-      scroll={{
-        y: 440,
+      dataSource={incidentData}
+      onRow={(record, rowIndex) => {
+        return {
+          onClick: (event) => {showDrawer(); setincidentDetailData(record)}, // click row
+        };
       }}
-      // pagination={{
-      //   pageSize: 7,
-      // }}
+      /* scroll={{
+        y: 440,
+      }} */
+      pagination={{
+        pageSize: 7,
+      }}
     />
+    <RightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData}/>
+    </>
   );
 }
 export default Incidents;

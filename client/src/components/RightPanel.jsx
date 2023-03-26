@@ -112,7 +112,7 @@ const RightPanel = (props) => {
         </div>
         <div className="info-area">
           <p className="title">Address</p>
-          <textarea className="address-area" defaultValue={"Lorem?"} disabled={false}/>         
+          <textarea className="address-area" defaultValue={"Lorem lorem"} disabled={false}/>         
         </div>
         <div className="info-area">
           <p className="title">Attachments</p>
@@ -124,19 +124,18 @@ const RightPanel = (props) => {
         </div>
         <div className="info-area">
           <p className="title">Status</p>
-          <Cascader options={options} defaultValue={incident_status} size="large" style={{ width: '85%'}}/>
+          <Cascader options={options} placement={"bottomRight"} defaultValue={incident_status} size="large" style={{ width: '85%'}}/>
         </div>
 
         <div className="bottom-area">
           <Button>Save</Button>
         </div>
 
-        <Modal title="Report" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} style={{
-          top: 100,
+        <Modal title="Report" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Report" style={{
+          top: 150,
+          
         }}>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <p>Are you sure you want to report this incident?</p>
         </Modal>
       </Drawer>
     </>

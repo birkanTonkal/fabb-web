@@ -102,3 +102,40 @@
 .ml {
     margin-left: 30px;
 }
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-btn-primary {
+    background-color: #D74343;
+    width: 112.86px;
+    border-radius: 3px;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {
+    border-radius: 0;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-body {
+    border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+    padding: 10px 0 35px 0;
+
+    p {
+        margin: 12px 0 0 22px;
+        font-weight: 400;
+        font-size: 16px;
+    }
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-footer {
+    margin: 12px 22px;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-modal .ant-modal-title {
+    margin: 12px 0 0 22px;
+}

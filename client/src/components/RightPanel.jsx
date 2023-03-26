@@ -1,7 +1,18 @@
-import { Drawer, message, Cascader} from "antd";
-import "../styles/RightPanel.scss";
-
+import { Drawer, message, Cascader, DatePicker, Input, Button, Modal} from "antd";
+import { useState } from "react";
 import { CopyOutlined } from "@ant-design/icons";
+import "../styles/RightPanel.scss";
+import "../styles/Incidents.scss";
+import {
+  LikeOutlined,
+  DislikeOutlined,
+  StopOutlined
+} from "@ant-design/icons";
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
+
+const { TextArea } = Input;
 
 const RightPanel = (props) => {
   const { showDrawer, incidentData, toggleDrawer } = props;
@@ -47,21 +58,36 @@ const RightPanel = (props) => {
     },
   ];
 
-  const onChange = (value) => {
-    console.log(value);
-    incidentData.incident_status = value;
-    value = incident_status;
+  const isDisabled = true;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    console.log("ok")
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    console.log("cancle")
   };
 
   return (
     <>
       <Drawer
-        width={500}
+        width={520}
         title="Details"
         onClose={() => showDrawer()}
         placement="right"
         open={toggleDrawer}
       >
+        <div className="report-area">
+          <a onClick={showModal}><StopOutlined /> Report</a>
+        </div>
         <div className="info-area">
           <p className="title">Report Number</p>
           <p className="report-number">
@@ -70,37 +96,48 @@ const RightPanel = (props) => {
         </div>
         <div className="info-area">
           <p className="title">Date</p>
-          <p>{create_date}</p>
+          <input defaultValue={create_date} disabled={isDisabled}/>    
         </div>
         <div className="info-area">
           <p className="title">Category</p>
-          <p>{category}</p>
+          <input defaultValue={category} disabled={isDisabled}/>
         </div>
         <div className="info-area">
           <p className="title">Title</p>
-          <p>{title}</p>
+          <input defaultValue={title} disabled={isDisabled}/>
         </div>
         <div className="info-area">
           <p className="title">Description</p>
-          <p>{description}</p>
+          <textarea defaultValue={description} disabled={isDisabled}/>
         </div>
         <div className="info-area">
           <p className="title">Address</p>
-          <p>{address}</p>
+          <textarea className="address-area" defaultValue={"Lorem?"} disabled={false}/>         
         </div>
         <div className="info-area">
           <p className="title">Attachments</p>
-          <p>{}</p>
         </div>
         <div className="info-area">
           <p className="title">Votes</p>
-          <p>{}</p>
+          <LikeOutlined  className="like-icon"/> <input className="vote-area" value={vote_counts?.upvote_count} disabled={isDisabled}/>
+          <DislikeOutlined  className="dislike-icon"/> <input className="vote-area" value={vote_counts?.downvote_count} disabled={isDisabled}/>
         </div>
         <div className="info-area">
           <p className="title">Status</p>
-          <p><Cascader options={options} onChange={onChange} defaultValue={incident_status}/></p>
+          <Cascader options={options} defaultValue={incident_status} size="large" style={{ width: '85%'}}/>
         </div>
 
+        <div className="bottom-area">
+          <Button>Save</Button>
+        </div>
+
+        <Modal title="Report" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} style={{
+          top: 100,
+        }}>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
       </Drawer>
     </>
   );

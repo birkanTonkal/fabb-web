@@ -1,10 +1,14 @@
-import { Table, Badge } from "antd";
+import { Table, Badge, Tag } from "antd";
 import axios from "axios";
 import "../styles/Incidents.scss";
 import RightPanel from "../components/RightPanel";
 import {
   LikeOutlined,
-  DislikeOutlined
+  DislikeOutlined,
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  ExclamationCircleOutlined,
+  SyncOutlined,
 } from "@ant-design/icons";
 import { useState, useEffect } from 'react';
 import { config } from "../utils/Constants";
@@ -130,13 +134,13 @@ function Incidents() {
       title: "Category",
       dataIndex: "category",
       sorter: (a, b) => a.category.localeCompare(b.category),
-      width: "16.66%",
+      
     },
     {
       title: "Title",
       dataIndex: "title",
       sorter: (a, b) => a.title.localeCompare(b.title),
-      width: "16.66%",
+      
     },
     {
       title: "Date",
@@ -144,19 +148,27 @@ function Incidents() {
       sorter: (a, b) => 
         new Date(...a.create_date.split("-").reverse()) -
         new Date(...b.create_date.split("-").reverse()),
-      width: "16.66%",
+      
     },
     {
-      title: "Votes",
+      title: "Likes",
       dataIndex: "vote_counts",
       sorter: (a, b) => a.vote_counts.upvote_count,
       render: (votes) => (
         <div className="vote-icons">
           <div className="like"><LikeOutlined className="like-icon"/>{votes.upvote_count}</div>
+        </div>
+      ),
+    },
+    {
+      title: "Dislikes",
+      dataIndex: "vote_counts",
+      sorter: (a, b) => a.vote_counts.downvote_count,
+      render: (votes) => (
+        <div className="vote-icons">
           <div className="dislike"><DislikeOutlined  className="dislike-icon"/>{votes.downvote_count}</div>
         </div>
       ),
-      width: "16.66%",
     },
     {
       title: "Status",
@@ -179,22 +191,39 @@ function Incidents() {
           value: "Rejected",
         },
       ],
-      width: "16.66%",
       editable: true,
       onFilter: (value, record) => { return record.incident_status[0] == value },
       render: (status) => (       
         <>
           {status.map((tag) => {
             if (tag === "Opened") {
-              return <Badge status="default" text={tag} />;
+              return (
+                <Tag icon={<ClockCircleOutlined />} key={tag}>
+                  {tag.toUpperCase()}
+                </Tag>
+              );
             } else if (tag === "In Progress") {
-              return <Badge status="processing" text={tag} />;
+                return (
+                  <Tag icon={<SyncOutlined spin />} color={"blue"} key={tag}>
+                    {tag.toUpperCase()}
+                  </Tag>
+                );
             } else if (tag === "Solved") {
-              return <Badge status="success" text={tag} />;
+              return (
+                <Tag icon={<CheckCircleOutlined />} color={"green"} key={tag}>
+                  {tag.toUpperCase()}
+                </Tag>
+              );
             } else if (tag === "Rejected") {
-              return <Badge status="error" text={tag} />;
+              return (
+                <Tag icon={<ExclamationCircleOutlined />} color={"red"} key={tag}>
+                  {tag.toUpperCase()}
+                </Tag>
+              );
             }
+            
           })}
+          
         </>
       ),      
     },

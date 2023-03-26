@@ -60,7 +60,7 @@ function Dashboard() {
     <Layout className="container">
       <Sider
         className="layout-left-area"
-        //collapsible
+        // collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
         style={{

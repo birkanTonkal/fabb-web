@@ -5,7 +5,7 @@
 }
 
 :where(.css-dev-only-do-not-override-ph9edi).ant-table-wrapper .ant-table-tbody>tr>td {
-    padding: 13px 16px;
+    padding: 8px 16px;
 }
 
 :where(.css-dev-only-do-not-override-ph9edi).ant-table-wrapper .ant-table-container table>thead>tr:first-child>* {
@@ -17,6 +17,12 @@
     border-radius: 0 !important;
 }
 
+:where(.css-dev-only-do-not-override-ph9edi).ant-tag {
+    padding: 5px 10px !important;
+    border-radius: 20px;
+    width: 115px;
+}
+
 .incident-table {
     cursor: pointer;
 
@@ -26,17 +32,17 @@
         .like {
             width: 65px;
         }
-
-        .like-icon {
-            color: rgba(51, 174, 16, 1);
-            margin-right: 8px;
-            font-size: 13px;
-        }
-
-        .dislike-icon {
-            color: rgba(232, 83, 66, 1);
-            margin-right: 8px;
-            font-size: 13px;
-        }
     }
+}
+
+.like-icon {
+    color: rgba(51, 174, 16, 1);
+    margin-right: 8px;
+    font-size: 13px !important;
+}
+
+.dislike-icon {
+    color: rgba(232, 83, 66, 1);
+    margin-right: 8px;
+    font-size: 13px !important;
 }

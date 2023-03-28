@@ -75,7 +75,7 @@ const RightPanel = (props) => {
     setIsModalOpen(false);
     console.log("cancle")
   };
-
+  
   return (
     <>
       <Drawer
@@ -96,23 +96,23 @@ const RightPanel = (props) => {
         </div>
         <div className="info-area">
           <p className="title">Date</p>
-          <input defaultValue={create_date} disabled={isDisabled}/>    
+          <input value={create_date} disabled={isDisabled}/>    
         </div>
         <div className="info-area">
           <p className="title">Category</p>
-          <input defaultValue={category} disabled={isDisabled}/>
+          <input value={category} disabled={isDisabled}/>
         </div>
         <div className="info-area">
           <p className="title">Title</p>
-          <input defaultValue={title} disabled={isDisabled}/>
+          <input value={title} disabled={isDisabled}/>
         </div>
         <div className="info-area">
           <p className="title">Description</p>
-          <textarea defaultValue={description} disabled={isDisabled}/>
+          <textarea value={description} disabled={isDisabled}/>
         </div>
         <div className="info-area">
           <p className="title">Address</p>
-          <textarea className="address-area" defaultValue={"Lorem lorem"} disabled={false}/>         
+          <textarea className="address-area" value={"Lorem lorem"} disabled={isDisabled}/>         
         </div>
         <div className="info-area">
           <p className="title">Attachments</p>
@@ -132,8 +132,7 @@ const RightPanel = (props) => {
         </div>
 
         <Modal title="Report" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Report" style={{
-          top: 150,
-          
+          top: 150,          
         }}>
           <p>Are you sure you want to report this incident?</p>
         </Modal>

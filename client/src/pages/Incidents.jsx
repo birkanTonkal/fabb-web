@@ -268,6 +268,7 @@ function Incidents() {
           onClick: (event) => {showDrawer(); setincidentDetailData(record)}, // click row
         };
       }}
+      onClick={((e) => {console.log(e)})}
       /* scroll={{
         y: 440,
       }} */

@@ -29,7 +29,7 @@ const RightPanel = (props) => {
     user_id,
     vote_counts,
   } = incidentData;
-
+  console.log(incidentData)
   const copy = async () => {
     await navigator.clipboard.writeText(report_number);
 
@@ -104,7 +104,8 @@ const RightPanel = (props) => {
         </div>
         <div className="info-area">
           <p className="title">Title</p>
-          <input defaultValue={title} disabled={isDisabled}/>
+          <input placeholder={title}  disabled={isDisabled}/>
+          <p>{title}</p>
         </div>
         <div className="info-area">
           <p className="title">Description</p>

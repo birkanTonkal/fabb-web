@@ -17,12 +17,14 @@ export const authSlice = createSlice({
       state.user = action.payload;
       state.user_type = action.payload.user_type;
       localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("user_id", state.user.user_id);
     },
     logoutUser: (state, action) => {
         state.isLoggedIn = false;
         state.user = {};
         state.user_type = null;
         localStorage.setItem("isLoggedIn", false);
+        localStorage.setItem("userId", null);
     },
   },
 })

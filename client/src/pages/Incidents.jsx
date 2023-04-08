@@ -46,7 +46,7 @@ function Incidents() {
       sorter: (a, b) => a.vote_counts.upvote_count,
       render: (votes) => (
         <div className="vote-icons">
-          <div className="like"><LikeOutlined className="like-icon"/>{votes.upvote_count}</div>
+          <div className="like"><LikeOutlined className="like-icon"/>{votes?.upvote_count}</div>
         </div>
       ),
     },
@@ -56,7 +56,7 @@ function Incidents() {
       sorter: (a, b) => a.vote_counts.downvote_count,
       render: (votes) => (
         <div className="vote-icons">
-          <div className="dislike"><DislikeOutlined  className="dislike-icon"/>{votes.downvote_count}</div>
+          <div className="dislike"><DislikeOutlined  className="dislike-icon"/>{votes?.downvote_count}</div>
         </div>
       ),
     },

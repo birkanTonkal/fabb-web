@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Layout, Menu } from "antd";
@@ -16,6 +16,9 @@ import {
 import LoginLeftPanel from "../components/LoginLeftPanel";
 import Statistics from "./Statistics";
 import ContactUs from "./ContactUs";
+import axios from "axios";
+import { config } from "../utils/Constants";
+import { loginUser } from "../slices/authSlice";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -36,6 +39,19 @@ function Dashboard() {
   const [currentOpenPage, setCurrentOpenPage] = useState("Incidents");
   const show = JSON.stringify(authState.user);
 
+  useEffect( ()=>{
+    if(authState.user_type == null) {
+        let userId = localStorage.getItem('user_id');
+        getUserByUserId(userId)
+    }
+  }, [])
+  const getUserByUserId = async (userId) => {
+     let user = await axios.get( `${config.URL}/user/${userId}`);
+     if (user.data) {
+      dispatch(loginUser(user.data))
+     }
+     
+  }
   const changePageOnRedux = (e) => {
     setCurrentOpenPage(e.key)
     dispatch(changePage(e.key))

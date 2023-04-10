@@ -35,6 +35,7 @@ function Login() {
       const userData = Object.values(userCredentials.data)[0];
       dispatch(loginUser(userData));
       navigate("/dashboard", { replace: true });
+
     }
 
     message.success("Successful");

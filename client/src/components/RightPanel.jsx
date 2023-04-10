@@ -1,5 +1,5 @@
 import { Drawer, message, Cascader, DatePicker, Input, Button, Modal} from "antd";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CopyOutlined } from "@ant-design/icons";
 import "../styles/RightPanel.scss";
 import "../styles/Incidents.scss";
@@ -10,11 +10,17 @@ import {
 } from "@ant-design/icons";
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { config } from "../utils/Constants";
 dayjs.extend(customParseFormat);
 
 const { TextArea } = Input;
 
 const RightPanel = (props) => {
+  const authState = useSelector((state) => state.auth);
+  const userType = authState.user_type
+  const inputRef = useRef({})
   const { showDrawer, incidentData, toggleDrawer } = props;
   const {
     address,
@@ -38,6 +44,17 @@ const RightPanel = (props) => {
       duration: 2,
     });
   };
+const currentRef = inputRef.current;
+console.log()
+  const incidentUpdateData = {
+    incident_id: incident_id,
+    category: currentRef?.category?.value,
+    title: currentRef?.title?.value,
+    description: currentRef?.description?.value,
+    incident_status: document.querySelector('.ant-select-selection-item')?.title,
+    create_date: currentRef?.date?.value,
+    vote_counts: {downvote_count: currentRef?.down_vote?.value, upvote_count: currentRef?.up_vote?.value}
+  }
 
   const options = [
     {
@@ -58,7 +75,8 @@ const RightPanel = (props) => {
     },
   ];
 
-  const isDisabled = true;
+  const updateIncident = async function(updateUser) {axios.put(`${config.URL}/incident/update`, updateUser).then(e => {console.log('success', e)}).catch(e => {console.log(e)})}
+  const isDisabled = userType == 'admin' ? false : true;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -75,7 +93,7 @@ const RightPanel = (props) => {
     setIsModalOpen(false);
     console.log("cancle")
   };
-  
+
   return (
     <>
       <Drawer
@@ -96,43 +114,44 @@ const RightPanel = (props) => {
         </div>
         <div className="info-area">
           <p className="title">Date</p>
-          <input value={create_date} disabled={isDisabled}/>    
+          <input defaultValue={create_date}  disabled={isDisabled} ref={ref => inputRef.current.date = ref}/>    
         </div>
         <div className="info-area">
           <p className="title">Category</p>
-          <input value={category} disabled={isDisabled}/>
+          <input defaultValue={category} disabled={isDisabled}  ref={ref => inputRef.current.category = ref}/>
         </div>
         <div className="info-area">
           <p className="title">Title</p>
-          <input value={title} disabled={isDisabled}/>
+          <input defaultValue={title}  disabled={isDisabled} ref={ref => inputRef.current.title = ref}/>
         </div>
         <div className="info-area">
-          <p className="title">Description</p>
-          <textarea value={description} disabled={isDisabled}/>
+          <p className="title2">Description</p>
+          <textarea defaultValue={description} disabled={isDisabled} ref={ref => inputRef.current.description = ref}/>
         </div>
         <div className="info-area">
           <p className="title">Address</p>
-          <textarea className="address-area" value={"Lorem lorem"} disabled={isDisabled}/>         
+          <textarea className="address-area" defaultValue={"Lorem lorem"} disabled={isDisabled} ref={ref => inputRef.current.address = ref}/>         
         </div>
         <div className="info-area">
           <p className="title">Attachments</p>
         </div>
         <div className="info-area">
           <p className="title">Votes</p>
-          <LikeOutlined  className="like-icon"/> <input className="vote-area" value={vote_counts?.upvote_count} disabled={isDisabled}/>
-          <DislikeOutlined  className="dislike-icon"/> <input className="vote-area" value={vote_counts?.downvote_count} disabled={isDisabled}/>
+          <LikeOutlined  className="like-icon"/> <input className="vote-area" defaultValue={vote_counts?.upvote_count} disabled={isDisabled} ref={ref => inputRef.current.up_vote = ref}/>
+          <DislikeOutlined  className="dislike-icon"/> <input className="vote-area" defaultValue={vote_counts?.downvote_count} disabled={isDisabled} ref={ref => inputRef.current.down_vote = ref}/>
         </div>
         <div className="info-area">
           <p className="title">Status</p>
-          <Cascader options={options} placement={"bottomRight"} defaultValue={incident_status} size="large" style={{ width: '85%'}}/>
+          <Cascader options={options} placement={"bottomRight"} defaultValue={incident_status} size="large" style={{ width: '85%'}} ref={ref => inputRef.current.status = ref}/>
         </div>
 
         <div className="bottom-area">
-          <Button>Save</Button>
+          <Button onClick={() => {updateIncident(incidentUpdateData)}}>Save</Button>
         </div>
 
         <Modal title="Report" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Report" style={{
-          top: 150,          
+          top: 150,
+          
         }}>
           <p>Are you sure you want to report this incident?</p>
         </Modal>

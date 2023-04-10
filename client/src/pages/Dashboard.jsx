@@ -5,28 +5,39 @@ import { Layout, Menu } from "antd";
 import { useDispatch } from "react-redux";
 import "../styles/Dashboard.scss";
 import Logo from "../assets/logo-sm";
-import Incidents from "./Incidents";
 import { changePage } from "../slices/dashboardSlice";
 import {
   IssuesCloseOutlined,
   BarChartOutlined,
   PhoneOutlined,
   LogoutOutlined,
+  UsergroupAddOutlined
 } from "@ant-design/icons";
 import LoginLeftPanel from "../components/LoginLeftPanel";
+import Users from "./Users";
+import Incidents from "./Incidents";
 import Statistics from "./Statistics";
 import ContactUs from "./ContactUs";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-function getItem(label, key, icon) {
-  return { label, key, icon };
+function getItem(label, key, icon, bool) {
+  if(bool) {
+    return 0;
+  }
+  else {
+    return { label, key, icon };
+  }  
 }
+
+const disableUser = false;
+
 const items = [
-  getItem("Incidents", "Incidents", <IssuesCloseOutlined />),
-  getItem("Statistics", "Statistics", <BarChartOutlined />),
-  getItem("Contact Us", "Contact Us", <PhoneOutlined />),
-  getItem("Logout", "Logout", <LogoutOutlined />),
+  getItem("Users", "Users", <UsergroupAddOutlined />, disableUser),
+  getItem("Incidents", "Incidents", <IssuesCloseOutlined />, 0),
+  getItem("Statistics", "Statistics", <BarChartOutlined />, 0),
+  getItem("Contact Us", "Contact Us", <PhoneOutlined />, 0),
+  getItem("Logout", "Logout", <LogoutOutlined />, 0),
 ];
 
 function Dashboard() {
@@ -45,6 +56,8 @@ function Dashboard() {
   
   const RenderPage = () => {
     switch(dashboardState.currentPage) {
+      case 'Users':
+        return <Users />
       case 'Incidents':
         return <Incidents />
       case 'Statistics':

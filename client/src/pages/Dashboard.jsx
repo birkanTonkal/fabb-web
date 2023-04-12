@@ -33,22 +33,21 @@ function getItem(label, key, icon, bool) {
   }  
 }
 
-const disableUser = false;
-
-const items = [
-  getItem("Users", "Users", <UsergroupAddOutlined />, disableUser),
-  getItem("Incidents", "Incidents", <IssuesCloseOutlined />, 0),
-  getItem("Statistics", "Statistics", <BarChartOutlined />, 0),
-  getItem("Contact Us", "Contact Us", <PhoneOutlined />, 0),
-  getItem("Logout", "Logout", <LogoutOutlined />, 0),
-];
-
 function Dashboard() {
   const authState = useSelector((state) => state.auth);
   const dashboardState = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
   const [currentOpenPage, setCurrentOpenPage] = useState("Incidents");
   const show = JSON.stringify(authState.user);
+  const isDisabled = authState.user == 'admin' ? false : true;
+
+  const items = [
+    getItem("Users", "Users", <UsergroupAddOutlined />, !isDisabled),
+    getItem("Incidents", "Incidents", <IssuesCloseOutlined />, 0),
+    getItem("Statistics", "Statistics", <BarChartOutlined />, 0),
+    getItem("Contact Us", "Contact Us", <PhoneOutlined />, 0),
+    getItem("Logout", "Logout", <LogoutOutlined />, 0),
+  ];
 
   useEffect( ()=>{
     if(authState.user_type == null) {

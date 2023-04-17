@@ -165,6 +165,22 @@ exports.updateUser = async (req, res) => {
     }
 };
 
+exports.getAllUsers = async (req, res) => {
+    try {
+        const ref = db.ref('users'); 
+        await ref.once('value', (data) => {
+            if (data) {
+                res.send(data.val());
+            } else {
+                res.status(500).send('fail oldu be naparsin >)');
+            }
+        });
+    }
+    catch {
+
+    }
+}
+
 function searchByField(ref, fieldValue, fieldName) {
     return ref
         .orderByChild(fieldName)

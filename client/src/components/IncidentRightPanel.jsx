@@ -17,7 +17,7 @@ dayjs.extend(customParseFormat);
 
 const { TextArea } = Input;
 
-const RightPanel = (props) => {
+const IncidentRightPanel = (props) => {
   const authState = useSelector((state) => state.auth);
   const userType = authState.user_type
   const inputRef = useRef({})
@@ -159,4 +159,4 @@ console.log()
     </>
   );
 };
-export default RightPanel;
+export default IncidentRightPanel;

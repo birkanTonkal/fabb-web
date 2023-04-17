@@ -42,9 +42,9 @@ function Dashboard() {
   const isDisabled = authState.user == 'admin' ? false : true;
 
   const items = [
-    getItem("Users", "Users", <UsergroupAddOutlined />, !isDisabled),
-    getItem("Incidents", "Incidents", <IssuesCloseOutlined />, 0),
     getItem("Statistics", "Statistics", <BarChartOutlined />, 0),
+    getItem("Users", "Users", <UsergroupAddOutlined />, !isDisabled),
+    getItem("Incidents", "Incidents", <IssuesCloseOutlined />, 0),    
     getItem("Contact Us", "Contact Us", <PhoneOutlined />, 0),
     getItem("Logout", "Logout", <LogoutOutlined />, 0),
   ];
@@ -56,11 +56,10 @@ function Dashboard() {
     }
   }, [])
   const getUserByUserId = async (userId) => {
-     let user = await axios.get( `${config.URL}/user/${userId}`);
-     if (user.data) {
-      dispatch(loginUser(user.data))
-     }
-     
+    let user = await axios.get( `${config.URL}/user/${userId}`);
+    if (user.data) {
+     dispatch(loginUser(user.data))
+    } 
   }
   const changePageOnRedux = (e) => {
     setCurrentOpenPage(e.key)
@@ -80,7 +79,7 @@ function Dashboard() {
       case 'Contact Us':
         return <ContactUs />
       default:
-      return <Incidents />
+        return <Statistics />
     }
    
   }

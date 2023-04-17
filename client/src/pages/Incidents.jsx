@@ -1,7 +1,7 @@
 import { Table, Badge, Tag } from "antd";
 import axios from "axios";
 import "../styles/Incidents.scss";
-import RightPanel from "../components/RightPanel";
+import IncidentRightPanel from "../components/IncidentRightPanel";
 import {
   LikeOutlined,
   DislikeOutlined,
@@ -165,7 +165,7 @@ function Incidents() {
         pageSize: 12,
       }}
     />
-    <RightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData}/>
+    <IncidentRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData}/>
     </>
   );
 }

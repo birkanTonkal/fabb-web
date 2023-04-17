@@ -1,19 +1,15 @@
 import React, { useRef } from "react";
 import "../styles/Register.scss";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginLeftPanel from "../components/LoginLeftPanel";
 import { config } from "../utils/Constants";
-import Logo from "../assets/logo";
 
 import {
-  UserOutlined,
-  LockOutlined,
   EyeTwoTone,
   EyeInvisibleOutlined,
 } from "@ant-design/icons";
-import { Button, Form, Input, Divider } from "antd";
+import { Button, Form, Input } from "antd";
 
 function Register() {
   const firstNameField = useRef(null);
@@ -69,11 +65,10 @@ function Register() {
               name="name"
               label="Name"
               rules={[
-                {
-                  required: true,
-                  message: "",
-                },
+                { required: true, message: "" },
+                // { min: 3, message: "" },
               ]}
+              hasFeedback
             >
               <Input
                 className="register-input"
@@ -87,11 +82,10 @@ function Register() {
               name="surname"
               label="Surname"
               rules={[
-                {
-                  required: true,
-                  message: "",
-                },
+                { required: true, message: "" },
+                // { min: 3, message: "" },
               ]}
+              hasFeedback
             >
               <Input
                 className="register-input"
@@ -105,11 +99,10 @@ function Register() {
               name="email"
               label="Email"
               rules={[
-                {
-                  required: true,
-                  message: "",
-                },
+                { required: true, message: "" },
+                { type: 'email', message: "" }
               ]}
+              hasFeedback
             >
               <Input
                 className="register-input"
@@ -123,11 +116,11 @@ function Register() {
               name="phone"
               label="Phone Number"
               rules={[
-                {
-                  required: true,
-                  message: "",
-                },
+                { required: true, message: "" },
+                { min: 10, message: "" },
+                { max: 10, message: "" }
               ]}
+              hasFeedback
             >
               <Input
                 className="register-input"
@@ -142,11 +135,16 @@ function Register() {
               name="password"
               label="Password"
               rules={[
-                {
-                  required: true,
-                  message: "",
-                },
+                { required: true, message: "" },
+                { min: 6, message: "" },
+              // {
+              //   validator: (_, value) =>
+              //     value && value.includes("A")
+              //       ? Promise.resolve()
+              //       : Promise.reject("Password does not match criteria."),
+              // },
               ]}
+              hasFeedback
             >
               <Input.Password
                 className="register-input"
@@ -162,12 +160,21 @@ function Register() {
               className="form-item"
               name="confirm_password"
               label="Confirm password"
+              dependencies={["password"]}
               rules={[
-                {
-                  required: true,
-                  message: "",
-                },
+                { required: true, message: ""},
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      ""
+                    );
+                  },
+                }),
               ]}
+              hasFeedback
             >
               <Input.Password
                 className="register-input"
@@ -191,7 +198,7 @@ function Register() {
             </div>
           </Form>
 
-          <p className="docs">
+          <Form.Item className="docs">
             By creating an account with FABB, you agree to the{" "}
             <a href="#">
               <b>Terms and Conditions</b>
@@ -200,7 +207,7 @@ function Register() {
             <a href="#">
               <b>Privacy Policy</b>
             </a>
-          </p>
+          </Form.Item>
 
           <Form.Item className="register-down">
             <span>Already have an account ?</span>

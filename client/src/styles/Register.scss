@@ -4,7 +4,7 @@
 .register-container {
 
     .register-right {
-        justify-content: center;
+        justify-content: space-evenly;
         padding-top: 40px;
 
         Form {
@@ -27,8 +27,6 @@
         }
 
         .docs {
-            font-weight: 300;
-            font-size: 1.2em;
             text-align: center;
             width: 40%;
 

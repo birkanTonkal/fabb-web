@@ -46,7 +46,7 @@ function Login() {
 
   const [form] = Form.useForm();
   const onFinish = (values) => {
-    form.resetFields();
+    form.resetFields();    
   };
 
   return (
@@ -63,10 +63,7 @@ function Login() {
           <Form.Item
             name="email"
             rules={[
-              {
-                required: true,
-                message: "",
-              },
+              { required: true, message: "" },
             ]}
           >
             <Input
@@ -81,10 +78,7 @@ function Login() {
           <Form.Item
             name="password"
             rules={[
-              {
-                required: true,
-                message: "",
-              },
+              { required: true, message: "" },
             ]}
           >
             <Input.Password

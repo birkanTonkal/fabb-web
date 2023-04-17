@@ -8,6 +8,7 @@ import {
   DislikeOutlined,
   StopOutlined
 } from "@ant-design/icons";
+import {isArray} from 'lodash'
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useSelector } from "react-redux";
@@ -15,13 +16,12 @@ import axios from "axios";
 import { config } from "../utils/Constants";
 dayjs.extend(customParseFormat);
 
-const { TextArea } = Input;
 
 const IncidentRightPanel = (props) => {
   const authState = useSelector((state) => state.auth);
   const userType = authState.user_type
   const inputRef = useRef({})
-  const { showDrawer, incidentData, toggleDrawer } = props;
+  const { showDrawer, incidentData, toggleDrawer, setIncidentData } = props;
   const {
     address,
     category,
@@ -44,16 +44,13 @@ const IncidentRightPanel = (props) => {
       duration: 2,
     });
   };
-const currentRef = inputRef.current;
-console.log()
-  const incidentUpdateData = {
-    incident_id: incident_id,
-    category: currentRef?.category?.value,
-    title: currentRef?.title?.value,
-    description: currentRef?.description?.value,
-    incident_status: document.querySelector('.ant-select-selection-item')?.title,
-    create_date: currentRef?.date?.value,
-    vote_counts: {downvote_count: currentRef?.down_vote?.value, upvote_count: currentRef?.up_vote?.value}
+
+  const onInputChange = (key, value) => {
+    let newIncidentData = {...incidentData, vote_counts: {...incidentData.vote_counts}, location: {...incidentData.location}, 
+      incident_status: incident_status}
+    newIncidentData[key] = value;
+    console.log(key, value)
+    setIncidentData(newIncidentData)
   }
 
   const options = [
@@ -75,7 +72,12 @@ console.log()
     },
   ];
 
-  const updateIncident = async function(updateUser) {axios.put(`${config.URL}/incident/update`, updateUser).then(e => {console.log('success', e)}).catch(e => {console.log(e)})}
+  const updateIncident = async function(updateIncident) {
+    if (isArray(updateIncident.incident_status)) { updateIncident.incident_status = updateIncident.incident_status[0]}
+    axios.put(`${config.URL}/incident/update`, updateIncident).
+        then(e => {console.log('success', e)}).
+        catch(e => {console.log('zart', e)})
+  }
   const isDisabled = userType == 'admin' ? false : true;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -108,45 +110,48 @@ console.log()
         </div>
         <div className="info-area">
           <p className="title">Report Number</p>
-          <p className="report-number">
-            {report_number} <CopyOutlined onClick={copy} />
-          </p>
+          <div className="title-container">
+            <input className="report-number" value={report_number}>
+            </input><CopyOutlined onClick={copy} />
+          </div>
+        
         </div>
+       
         <div className="info-area">
           <p className="title">Date</p>
-          <input defaultValue={create_date}  disabled={isDisabled} ref={ref => inputRef.current.date = ref}/>    
+          <input value={create_date}  disabled={isDisabled} onChange={ (e) => {onInputChange('create_date',e.target.value )}}/>    
         </div>
         <div className="info-area">
           <p className="title">Category</p>
-          <input defaultValue={category} disabled={isDisabled}  ref={ref => inputRef.current.category = ref}/>
+          <input value={category} disabled={isDisabled} onChange={ (e) => {onInputChange('category',e.target.value )}} />
         </div>
         <div className="info-area">
           <p className="title">Title</p>
-          <input defaultValue={title}  disabled={isDisabled} ref={ref => inputRef.current.title = ref}/>
+          <input value={title}  disabled={isDisabled} onChange={ (e) => {onInputChange('title',e.target.value )}} />
         </div>
         <div className="info-area">
           <p className="title2">Description</p>
-          <textarea defaultValue={description} disabled={isDisabled} ref={ref => inputRef.current.description = ref}/>
+          <textarea value={description} disabled={isDisabled} onChange={ (e) => {onInputChange('description',e.target.value )}}/>
         </div>
         <div className="info-area">
           <p className="title">Address</p>
-          <textarea className="address-area" defaultValue={"Lorem lorem"} disabled={isDisabled} ref={ref => inputRef.current.address = ref}/>         
+          <textarea className="address-area" value={address} disabled={isDisabled} onChange={ (e) => {onInputChange('address', e.target.value )}}/>         
         </div>
         <div className="info-area">
           <p className="title">Attachments</p>
         </div>
         <div className="info-area">
           <p className="title">Votes</p>
-          <LikeOutlined  className="like-icon"/> <input className="vote-area" defaultValue={vote_counts?.upvote_count} disabled={isDisabled} ref={ref => inputRef.current.up_vote = ref}/>
-          <DislikeOutlined  className="dislike-icon"/> <input className="vote-area" defaultValue={vote_counts?.downvote_count} disabled={isDisabled} ref={ref => inputRef.current.down_vote = ref}/>
+          <LikeOutlined  className="like-icon"/> <input className="vote-area" value={vote_counts?.upvote_count} disabled={isDisabled} />
+          <DislikeOutlined  className="dislike-icon"/> <input className="vote-area" value={vote_counts?.downvote_count} disabled={isDisabled} />
         </div>
         <div className="info-area">
           <p className="title">Status</p>
-          <Cascader options={options} placement={"bottomRight"} defaultValue={incident_status} size="large" style={{ width: '85%'}} ref={ref => inputRef.current.status = ref}/>
+          <Cascader options={options} placement={"bottomRight"} defaultValue={incident_status} size="large" style={{ width: '85%'}} onChange={ (data) => {onInputChange('incident_status',data[0])}}/>
         </div>
 
         <div className="bottom-area">
-          <Button onClick={() => {updateIncident(incidentUpdateData)}}>Save</Button>
+          <Button onClick={() => {updateIncident(incidentData)}}>Save</Button>
         </div>
 
         <Modal title="Report" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Report" style={{

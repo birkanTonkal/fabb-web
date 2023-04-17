@@ -165,7 +165,7 @@ function Incidents() {
         pageSize: 15,
       }}
     />
-    <IncidentRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData}/>
+    <IncidentRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData} setIncidentData={setincidentDetailData}/>
     </>
   );
 }

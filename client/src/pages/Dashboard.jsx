@@ -37,7 +37,7 @@ function Dashboard() {
   const authState = useSelector((state) => state.auth);
   const dashboardState = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
-  const [currentOpenPage, setCurrentOpenPage] = useState("Incidents");
+  const [currentOpenPage, setCurrentOpenPage] = useState("Statistics");
   const show = JSON.stringify(authState.user);
   const isDisabled = authState.user == 'admin' ? false : true;
 

@@ -91,7 +91,7 @@ console.log()
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    console.log("cancle")
+    console.log("cancel")
   };
 
   return (

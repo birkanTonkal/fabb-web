@@ -41,7 +41,6 @@ const currentRef = inputRef.current;
 console.log()
   
 const incidentUpdateData = {
-
     // user_id: user_id,
     // category: currentRef?.category?.value,
     // title: currentRef?.title?.value,
@@ -61,7 +60,6 @@ const options = [
       label: "Normal"
     },
 ];
-
   
 const updateUser = async function(updateUser) {axios.put(`${config.URL}/user/update`, updateUser).then(e => {console.log('success', e)}).catch(e => {console.log(e)})}
 const isDisabled = userType == 'admin' ? false : true;
@@ -78,19 +76,19 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    console.log("cancle")
+    console.log("cancel")
   };
 
   return (
     <>
-      {/* <Drawer
+      <Drawer
         width={520}
         title="Details"
         onClose={() => showDrawer()}
         placement="right"
         open={toggleDrawer}
       >
-        <div className="report-area">
+        {/* <div className="report-area">
           <a onClick={showModal}><StopOutlined /> Report</a>
         </div>
         <div className="info-area">
@@ -141,8 +139,8 @@ const [isModalOpen, setIsModalOpen] = useState(false);
           
         }}>
           <p>Are you sure you want to report this incident?</p>
-        </Modal>
-      </Drawer> */}
+        </Modal> */}
+      </Drawer>
     </>
   );
 };

@@ -28,9 +28,9 @@ function Users() {
     {
       title: "Created Date",
       dataIndex: "create_date",
-      sorter: (a, b) => 
-        new Date(...a.create_date.split("-").reverse()) -
-        new Date(...b.create_date.split("-").reverse()),      
+      // sorter: (a, b) => 
+      //   new Date(...a.create_date.split("-").reverse()) -
+      //   new Date(...b.create_date.split("-").reverse()),      
     },
     {
       title: "User Type",
@@ -94,10 +94,10 @@ function Users() {
         y: 440,
       }} */
       pagination={{
-        pageSize: 12,
+        pageSize: 15,
       }}
     />
-    {/* <UserRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} userData={userDetailData}/> */}
+    <UserRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} userData={userDetailData}/>
     </>
   );
 }

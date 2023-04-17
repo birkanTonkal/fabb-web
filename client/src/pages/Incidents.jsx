@@ -162,7 +162,7 @@ function Incidents() {
         y: 440,
       }} */
       pagination={{
-        pageSize: 12,
+        pageSize: 15,
       }}
     />
     <IncidentRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData}/>

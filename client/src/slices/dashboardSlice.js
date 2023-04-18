@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  currentPage: "Incidents"
+  currentPage: "Statistics"
 }
 
 

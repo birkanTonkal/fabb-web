@@ -20,7 +20,10 @@ import Statistics from "./Statistics";
 import ContactUs from "./ContactUs";
 import axios from "axios";
 import { config } from "../utils/Constants";
-import { loginUser } from "../slices/authSlice";
+import { loginUser, logoutUser } from "../slices/authSlice";
+import { useNavigate } from "react-router";
+import { Navigate } from "react-router-dom";
+import Login from "./Login";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -40,6 +43,7 @@ function Dashboard() {
   const [currentOpenPage, setCurrentOpenPage] = useState("Statistics");
   const show = JSON.stringify(authState.user);
   const isDisabled = authState.user == 'admin' ? false : true;
+  const navigate = useNavigate();
 
   const items = [
     getItem("Statistics", "Statistics", <BarChartOutlined />, 0),
@@ -62,10 +66,17 @@ function Dashboard() {
     } 
   }
   const changePageOnRedux = (e) => {
+    if (e.key == 'Logout') {
+      signoutUser();
+    }
     setCurrentOpenPage(e.key)
     dispatch(changePage(e.key))
+  
   };
-
+  const signoutUser = () => {
+    dispatch(logoutUser());
+    navigate("/signup", { replace: true });
+  }
   const [collapsed, setCollapsed] = useState(true);
   
   const RenderPage = () => {

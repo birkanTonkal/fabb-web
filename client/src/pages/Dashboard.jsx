@@ -124,7 +124,7 @@ function Dashboard() {
       </Sider>
 
       <Layout className="layout-right-area" >
-        <Header className="header">{dashboardState.currentPage}</Header>
+        {/* <Header className="header">{dashboardState.currentPage}</Header> */}
 
         <Content className="content">
          <RenderPage />

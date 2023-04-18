@@ -6,7 +6,9 @@ import "../styles/Incidents.scss";
 import {
   LikeOutlined,
   DislikeOutlined,
-  StopOutlined
+  StopOutlined,
+  DeleteOutlined,
+  CheckOutlined
 } from "@ant-design/icons";
 import {isArray} from 'lodash'
 import dayjs from 'dayjs';
@@ -78,6 +80,11 @@ const IncidentRightPanel = (props) => {
         then(e => {console.log('success', e)}).
         catch(e => {console.log('zart', e)})
   }
+
+  const deleteIncident = () => {
+
+  }
+
   const isDisabled = userType == 'admin' ? false : true;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -151,7 +158,11 @@ const IncidentRightPanel = (props) => {
         </div>
 
         <div className="bottom-area">
-          <Button onClick={() => {updateIncident(incidentData)}}>Save</Button>
+          <Button className="update-btn" onClick={() => {updateIncident(incidentData)}}><CheckOutlined /> Save</Button>
+          
+          {/* user type'a göre değişecek */}
+          { true ? <Button className="delete-btn" onClick={() => {deleteIncident()}}><DeleteOutlined /> Delete</Button> : null }
+       
         </div>
 
         <Modal title="Report" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Report" style={{

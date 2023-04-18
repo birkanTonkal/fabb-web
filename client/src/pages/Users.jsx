@@ -37,12 +37,12 @@ function Users() {
       dataIndex: "user_type",
       filters: [
         {
-          text: "Admin",
-          value: "Admin",
+          text: "admin",
+          value: "admin",
         },
         {
-          text: "Normal",
-          value: "Normal",
+          text: "normal",
+          value: "normal",
         },
       ],
       editable: true,

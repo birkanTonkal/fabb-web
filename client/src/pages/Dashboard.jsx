@@ -130,7 +130,7 @@ function Dashboard() {
          <RenderPage />
         </Content>
 
-        {/* <Footer className="footer">Made by FabbSoft ©2023</Footer> */}
+        <Footer className="footer">Made by FabbSoft ©2023</Footer>
       </Layout>
     </Layout>
   );

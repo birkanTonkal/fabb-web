@@ -80,7 +80,7 @@ const IncidentRightPanel = (props) => {
         then(e => {console.log('success', e)}).
         catch(e => {console.log('zart', e)})
   }
-
+    
   const deleteIncident = () => {
 
   }
@@ -115,43 +115,50 @@ const IncidentRightPanel = (props) => {
         <div className="report-area">
           <a onClick={showModal}><StopOutlined /> Report</a>
         </div>
+
         <div className="info-area">
           <p className="title">Report Number</p>
           <div className="title-container">
             <input className="report-number" value={report_number}>
             </input><CopyOutlined onClick={copy} />
-          </div>
-        
+          </div>        
         </div>
        
         <div className="info-area">
           <p className="title">Date</p>
           <input value={create_date}  disabled={isDisabled} onChange={ (e) => {onInputChange('create_date',e.target.value )}}/>    
         </div>
+
         <div className="info-area">
           <p className="title">Category</p>
           <input value={category} disabled={isDisabled} onChange={ (e) => {onInputChange('category',e.target.value )}} />
         </div>
+
         <div className="info-area">
           <p className="title">Title</p>
           <input value={title}  disabled={isDisabled} onChange={ (e) => {onInputChange('title',e.target.value )}} />
         </div>
+
         <div className="info-area">
           <p className="title2">Description</p>
           <textarea value={description} disabled={isDisabled} onChange={ (e) => {onInputChange('description',e.target.value )}}/>
         </div>
+
         <div className="info-area">
           <p className="title">Address</p>
           <textarea className="address-area" value={address} disabled={isDisabled} onChange={ (e) => {onInputChange('address', e.target.value )}}/>         
         </div>
+
         <div className="info-area">
           <p className="title">Attachments</p>
         </div>
+
         <div className="info-area">
           <p className="title">Votes</p>
           <LikeOutlined  className="like-icon"/> <input className="vote-area" value={vote_counts?.upvote_count} disabled={isDisabled} />
           <DislikeOutlined  className="dislike-icon"/> <input className="vote-area" value={vote_counts?.downvote_count} disabled={isDisabled} />
         </div>
+
         <div className="info-area">
           <p className="title">Status</p>
           <Cascader options={options} placement={"bottomRight"} defaultValue={incident_status} size="large" style={{ width: '85%'}} onChange={ (data) => {onInputChange('incident_status',data[0])}}/>

@@ -1,16 +1,16 @@
-import { Drawer, message, Cascader, DatePicker, Input, Button, Modal} from "antd";
+import { Drawer, Cascader, Input, Button, Modal} from "antd";
 import { useRef, useState } from "react";
-import { CopyOutlined } from "@ant-design/icons";
 import "../styles/RightPanel.scss";
 import "../styles/Incidents.scss";
-import {
-
-} from "@ant-design/icons";
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { config } from "../utils/Constants";
+import {
+  DeleteOutlined,
+  CheckOutlined
+} from "@ant-design/icons";
 dayjs.extend(customParseFormat);
 
 const { TextArea } = Input;
@@ -18,9 +18,8 @@ const { TextArea } = Input;
 const UserRightPanel = (props) => {
   const authState = useSelector((state) => state.auth);
   const userType = authState.user_type
-  const inputRef = useRef({})
-  
-  const { showDrawer, userData, toggleDrawer } = props;
+  const inputRef = useRef({})  
+  const { showDrawer, userData, toggleDrawer, setUserData } = props;
   const {
     account_id,
     create_date,
@@ -36,34 +35,32 @@ const UserRightPanel = (props) => {
     user_id,
     user_type
   } = userData;
+  
+  const onInputChange = (key, value) => {
+    let newUserData = {...userData, disliked_incidents: {...userData.disliked_incidents}, incidents: {...userData.incidents}, liked_incidents: {...userData.liked_incidents}, location: {...userData.location}, 
+      user_type: user_type}
+    newUserData[key] = value;
+    console.log(key, value)
+    setUserData(newUserData)
+  }
+  
+  const options = [
+      {
+        value: "admin",
+        label: "admin"
+      },
+      {
+        value: "normal",
+        label: "normal"
+      },
+  ];
+    
+  const updateUser = async function(updateUser) {axios.put(`${config.URL}/user/update`, updateUser).then(e => {console.log('success', e)}).catch(e => {console.log(e)})}
+  const deleteUser = () => {
 
-const currentRef = inputRef.current;
-console.log()
-  
-const incidentUpdateData = {
-    // user_id: user_id,
-    // category: currentRef?.category?.value,
-    // title: currentRef?.title?.value,
-    // description: currentRef?.description?.value,
-    // incident_status: document.querySelector('.ant-select-selection-item')?.title,
-    // create_date: currentRef?.date?.value,
-    // vote_counts: {downvote_count: currentRef?.down_vote?.value, upvote_count: currentRef?.up_vote?.value}
-}
-  
-const options = [
-    {
-      value: "Admin",
-      label: "Admin"
-    },
-    {
-      value: "Normal",
-      label: "Normal"
-    },
-];
-  
-const updateUser = async function(updateUser) {axios.put(`${config.URL}/user/update`, updateUser).then(e => {console.log('success', e)}).catch(e => {console.log(e)})}
-const isDisabled = userType == 'admin' ? false : true;
-const [isModalOpen, setIsModalOpen] = useState(false);
+  }
+  const isDisabled = userType == 'admin' ? false : true;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -88,58 +85,54 @@ const [isModalOpen, setIsModalOpen] = useState(false);
         placement="right"
         open={toggleDrawer}
       >
-        {/* <div className="report-area">
-          <a onClick={showModal}><StopOutlined /> Report</a>
-        </div>
         <div className="info-area">
-          <p className="title">Report Number</p>
-          <p className="report-number">
-            {report_number} <CopyOutlined onClick={copy} />
-          </p>
+          <p className="title">Account Id</p>
+          <input value={account_id}  disabled={isDisabled} onChange={ (e) => {onInputChange('account_id',e.target.value )}}/>    
         </div>
+
         <div className="info-area">
-          <p className="title">Date</p>
-          <input defaultValue={create_date}  disabled={isDisabled} ref={ref => inputRef.current.date = ref}/>    
+          <p className="title">User Id</p>
+          <input value={user_id}  disabled={isDisabled} onChange={ (e) => {onInputChange('user_id',e.target.value )}}/>    
         </div>
+
         <div className="info-area">
-          <p className="title">Category</p>
-          <input defaultValue={category} disabled={isDisabled}  ref={ref => inputRef.current.category = ref}/>
+          <p className="title">Full Name</p>
+          <input value={full_name}  disabled={isDisabled} onChange={ (e) => {onInputChange('full_name',e.target.value )}}/>    
         </div>
+
         <div className="info-area">
-          <p className="title">Title</p>
-          <input defaultValue={title}  disabled={isDisabled} ref={ref => inputRef.current.title = ref}/>
+          <p className="title">Email</p>
+          <input value={email}  disabled={isDisabled} onChange={ (e) => {onInputChange('email',e.target.value )}}/>    
         </div>
+
         <div className="info-area">
-          <p className="title2">Description</p>
-          <textarea defaultValue={description} disabled={isDisabled} ref={ref => inputRef.current.description = ref}/>
+          <p className="title">Phone</p>
+          <input value={phone_number}  disabled={isDisabled} onChange={ (e) => {onInputChange('phone_number',e.target.value )}}/>    
         </div>
+
         <div className="info-area">
-          <p className="title">Address</p>
-          <textarea className="address-area" defaultValue={"Lorem lorem"} disabled={isDisabled} ref={ref => inputRef.current.address = ref}/>         
+          <p className="title">Created Date</p>
+          <input value={create_date}  disabled={isDisabled} onChange={ (e) => {onInputChange('create_date',e.target.value )}}/>    
         </div>
+
+        {/* <div className="info-area">
+          <p className="title">User Type</p>
+          <input value={user_type}  disabled={isDisabled} onChange={ (e) => {onInputChange('user_type',e.target.value )}}/>    
+        </div>     */}
+
         <div className="info-area">
-          <p className="title">Attachments</p>
-        </div>
-        <div className="info-area">
-          <p className="title">Votes</p>
-          <LikeOutlined  className="like-icon"/> <input className="vote-area" defaultValue={vote_counts?.upvote_count} disabled={isDisabled} ref={ref => inputRef.current.up_vote = ref}/>
-          <DislikeOutlined  className="dislike-icon"/> <input className="vote-area" defaultValue={vote_counts?.downvote_count} disabled={isDisabled} ref={ref => inputRef.current.down_vote = ref}/>
-        </div>
-        <div className="info-area">
-          <p className="title">Status</p>
-          <Cascader options={options} placement={"bottomRight"} defaultValue={incident_status} size="large" style={{ width: '85%'}} ref={ref => inputRef.current.status = ref}/>
+          <p className="title">User Type</p>
+          <Cascader options={options} placement={"bottomRight"} defaultValue={user_type} size="large" style={{ width: '85%'}} onChange={ (data) => {onInputChange('user_type',data[0])}}/>
         </div>
 
         <div className="bottom-area">
-          <Button onClick={() => {updateIncident(incidentUpdateData)}}>Save</Button>
+          <Button className="update-btn" onClick={() => {updateUser(userData)}}><CheckOutlined /> Save</Button>
+          
+          {/* user type'a göre değişecek */}
+          { true ? <Button className="delete-btn" onClick={() => {deleteUser()}}><DeleteOutlined /> Delete</Button> : null }
+       
         </div>
 
-        <Modal title="Report" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Report" style={{
-          top: 150,
-          
-        }}>
-          <p>Are you sure you want to report this incident?</p>
-        </Modal> */}
       </Drawer>
     </>
   );

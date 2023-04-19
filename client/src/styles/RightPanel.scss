@@ -67,10 +67,6 @@ Button {
     }
 }
 
-.info-area:nth-child(10) {
-    margin-bottom: 50px !important;
-}
-
 .ant-drawer-body {
     padding: 15px 0px 100px 50px !important;
 }
@@ -92,6 +88,7 @@ Button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 50px !important;
 
     Button {
         color: white;

@@ -97,7 +97,7 @@ function Users() {
         pageSize: 15,
       }}
     />
-    <UserRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} userData={userDetailData}/>
+    <UserRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} userData={userDetailData} setUserData={setUserDetailData}/>
     </>
   );
 }

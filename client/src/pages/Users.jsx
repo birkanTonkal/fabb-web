@@ -28,9 +28,9 @@ function Users() {
     {
       title: "Created Date",
       dataIndex: "create_date",
-      // sorter: (a, b) => 
-      //   new Date(...a.create_date.split("-").reverse()) -
-      //   new Date(...b.create_date.split("-").reverse()),      
+      sorter: (a, b) => 
+      new Date(...a.create_date.split("-").reverse()) -
+        new Date(...b.create_date.split("-").reverse()),    
     },
     {
       title: "User Type",
@@ -46,7 +46,7 @@ function Users() {
         },
       ],
       editable: true,
-      onFilter: (value, record) => { return record.user_type[0] == value },    
+      onFilter: (value, record) => { return record.user_type == value },    
     },
 ];
   const [userData, setUserData] = useState([])
@@ -62,8 +62,8 @@ function Users() {
     //console.log(res.data)
     let key = 0
     for(const userId in users) {
-      users[userId].user_type =[users[userId].user_type]
       users[userId].key = key
+      users[userId].create_date = new Date(users[userId].create_date).toLocaleDateString();
       fixedList.push(users[userId])
       key += 1
     }

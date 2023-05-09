@@ -9,7 +9,7 @@ import {
   EyeTwoTone,
   EyeInvisibleOutlined,
 } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 
 function Register() {
   const firstNameField = useRef(null);
@@ -18,7 +18,9 @@ function Register() {
   const passwordField = useRef(null);
   const phoneField = useRef(null);
   const navigate = useNavigate();
-
+  message.config({
+    duration: 2,
+  });
   const register = async () => {
     const userCredentials = await axios.post(`${config.URL}/user/signup`, {
       email: emailField.current.input.value,
@@ -32,7 +34,10 @@ function Register() {
     /*  if(userCredentials?.data?.user_id) {
       navigate('/login')
     } */
-    console.log(userCredentials.data);
+
+    if (userCredentials) {
+      message.info("Your request has been received. We will get in touch with you shortly ")
+    }
   };
 
   const [form] = Form.useForm();

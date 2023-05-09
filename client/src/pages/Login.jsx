@@ -23,25 +23,32 @@ function Login() {
   const passwordField = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  message.config({
+    duration: 2,
+  });
 
   const login = async () => {
-    const email = emailField.current.input.value;
-    const password = passwordField.current.input.value;
-    const userCredentials = await axios.get(
-      `${config.URL}/user/signin?email=${email}&password=${password}`
-    );
-    console.log(userCredentials.data);
-    if (userCredentials.status === 200) {
-      const userData = Object.values(userCredentials.data)[0];
-      dispatch(loginUser(userData));
-      navigate("/dashboard", { replace: true });
-
+    try {
+      const email = emailField.current.input.value;
+      const password = passwordField.current.input.value;
+      const userCredentials = await axios.get(
+        `${config.URL}/user/signin?email=${email}&password=${password}`
+      );
+      if (userCredentials.status === 200) {
+        const userData = Object.values(userCredentials.data)[0];
+        if (userData.user_type == 'admin' || userData.user_type == 'customer' || userData.user_type == 'super_admin') {
+          message.success("Successful");
+          dispatch(loginUser(userData));
+          navigate("/dashboard", { replace: true });
+        }
+        else {
+          message.error('Currently your account is not active')
+        }
+      }
     }
-
-    message.success("Successful");
-    message.config({
-      duration: 2,
-    });
+    catch (e) {
+      message.error('Your credentials are not correct')
+    }
   };
 
   const [form] = Form.useForm();
@@ -58,7 +65,6 @@ function Login() {
       <div className="login-right">
         <Logo className="logo" />
         <Divider>Sign in to dashboard</Divider>
-
         <Form onFinish={onFinish} form={form}>
           <Form.Item
             name="email"

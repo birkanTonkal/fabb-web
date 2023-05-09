@@ -42,12 +42,13 @@ function Dashboard() {
   const dispatch = useDispatch();
   const [currentOpenPage, setCurrentOpenPage] = useState("Statistics");
   const show = JSON.stringify(authState.user);
-  const isDisabled = authState.user == 'admin' ? false : true;
+  const isDisabled = authState.user?.user_type == 'admin' || 'super_admin' ? false : true;
+  console.log(isDisabled)
   const navigate = useNavigate();
 
   const items = [
     getItem("Statistics", "Statistics", <BarChartOutlined />, 0),
-    getItem("Users", "Users", <UsergroupAddOutlined />, !isDisabled),
+    getItem("Users", "Users", <UsergroupAddOutlined />, isDisabled),
     getItem("Incidents", "Incidents", <IssuesCloseOutlined />, 0),    
     getItem("Contact Us", "Contact Us", <PhoneOutlined />, 0),
     getItem("Logout", "Logout", <LogoutOutlined />, 0),

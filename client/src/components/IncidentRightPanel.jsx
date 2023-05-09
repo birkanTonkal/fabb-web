@@ -21,7 +21,8 @@ dayjs.extend(customParseFormat);
 
 const IncidentRightPanel = (props) => {
   const authState = useSelector((state) => state.auth);
-  const userType = authState.user_type
+  const userType = authState.user_type;
+  const isAdmin = userType == 'admin' || 'super_admin' ? true : false 
   const inputRef = useRef({})
   const { showDrawer, incidentData, toggleDrawer, setIncidentData } = props;
   const {
@@ -85,7 +86,7 @@ const IncidentRightPanel = (props) => {
 
   }
 
-  const isDisabled = userType == 'admin' ? false : true;
+  const isDisabled = userType == 'admin' || 'super_admin' ? false : true;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -167,8 +168,7 @@ const IncidentRightPanel = (props) => {
         <div className="bottom-area">
           <Button className="update-btn" onClick={() => {updateIncident(incidentData)}}><CheckOutlined /> Save</Button>
           
-          {/* user type'a göre değişecek */}
-          { true ? <Button className="delete-btn" onClick={() => {deleteIncident()}}><DeleteOutlined /> Delete</Button> : null }
+          { isAdmin ? <Button className="delete-btn" onClick={() => {deleteIncident()}}><DeleteOutlined /> Delete</Button> : null }
        
         </div>
 

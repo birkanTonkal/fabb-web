@@ -44,22 +44,45 @@ const UserRightPanel = (props) => {
     setUserData(newUserData)
   }
   
-  const options = [
+  const superAdminOptions = [
+    {
+      value: "super_admin",
+      label: "Super Admin"
+    },
       {
         value: "admin",
-        label: "admin"
+        label: "Admin"
       },
       {
         value: "normal",
-        label: "normal"
+        label: "Normal"
       },
+      {
+        value: "customer",
+        label: "Customer"
+      }
   ];
+  const options = [
+    {
+      value: "admin",
+      label: "Admin"
+    },
+    {
+      value: "normal",
+      label: "Normal"
+    },
+    {
+      value: "customer",
+      label: "Customer"
+    }
+  ]
     
   const updateUser = async function(updateUser) {axios.put(`${config.URL}/user/update`, updateUser).then(e => {console.log('success', e)}).catch(e => {console.log(e)})}
   const deleteUser = () => {
 
   }
-  const isDisabled = userType == 'admin' ? false : true;
+  const isDisabled = userType == 'admin' || 'super_admin' ? false : true;
+  const isSuperAdmin = userType == 'super_admin' ? true : false;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -87,12 +110,12 @@ const UserRightPanel = (props) => {
       >
         <div className="info-area">
           <p className="title">Account Id</p>
-          <input value={account_id}  disabled={isDisabled} onChange={ (e) => {onInputChange('account_id',e.target.value )}}/>    
+          <input value={account_id}  disabled={isSuperAdmin} onChange={ (e) => {onInputChange('account_id',e.target.value )}}/>    
         </div>
 
         <div className="info-area">
           <p className="title">User Id</p>
-          <input value={user_id}  disabled={isDisabled} onChange={ (e) => {onInputChange('user_id',e.target.value )}}/>    
+          <input value={user_id}  disabled={isSuperAdmin} onChange={ (e) => {onInputChange('user_id',e.target.value )}}/>    
         </div>
 
         <div className="info-area">
@@ -122,7 +145,7 @@ const UserRightPanel = (props) => {
 
         <div className="info-area">
           <p className="title">User Type</p>
-          <Cascader options={options} placement={"bottomRight"} defaultValue={user_type} size="large" style={{ width: '85%'}} onChange={ (data) => {onInputChange('user_type',data[0])}}/>
+          <Cascader options={isSuperAdmin ? superAdminOptions : options} placement={"bottomRight"} defaultValue={user_type} size="large" style={{ width: '85%'}} onChange={ (data) => {onInputChange('user_type',data[0])}}/>
         </div>
 
         <div className="bottom-area">

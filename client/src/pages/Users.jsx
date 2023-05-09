@@ -37,8 +37,16 @@ function Users() {
       dataIndex: "user_type",
       filters: [
         {
+          text: "super admin",
+          value: "super_admin",
+        },
+        {
           text: "admin",
           value: "admin",
+        },
+        {
+          text: "customer",
+          value: "customer",
         },
         {
           text: "normal",

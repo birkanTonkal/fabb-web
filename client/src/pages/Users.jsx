@@ -37,24 +37,57 @@ function Users() {
       dataIndex: "user_type",
       filters: [
         {
-          text: "super admin",
+          text: "Super Admin",
           value: "super_admin",
         },
         {
-          text: "admin",
+          text: "Admin",
           value: "admin",
         },
         {
-          text: "customer",
+          text: "Customer",
           value: "customer",
         },
         {
-          text: "normal",
+          text: "Normal",
           value: "normal",
         },
       ],
       editable: true,
-      onFilter: (value, record) => { return record.user_type == value },    
+      onFilter: (value, record) => { return record.user_type[0] == value },  
+      render: (type) => (
+        <>
+          {type.map((tag) => {
+            if (tag === "super_admin") {
+              return (
+                <div>
+                  <Badge status="error" key={tag} />SUPER ADMIN 
+                </div>             
+              );
+            } else if (tag === "admin") {
+                return (
+                  <div>
+                    <Badge status="warning" key={tag} />{tag.toUpperCase()}
+                  </div>
+                );
+            } else if (tag === "customer") {
+              return (
+                <div>
+                  <Badge status="success" key={tag} />{tag.toUpperCase()}
+                </div>
+              );
+            } else if (tag === "normal") {
+              return (
+                <div>
+                  <Badge status="default" key={tag} />{tag.toUpperCase()}
+                </div>
+              );
+            }
+            
+          })}
+        </>
+      ),
+              
     },
 ];
   const [userData, setUserData] = useState([])
@@ -70,10 +103,10 @@ function Users() {
     //console.log(res.data)
     let key = 0
     for(const userId in users) {
+      users[userId].user_type =[users[userId].user_type]
       users[userId].key = key
       users[userId].create_date = new Date(users[userId].create_date).toLocaleDateString();
       fixedList.push(users[userId])
-      key += 1
     }
     setUserData(fixedList)
      
@@ -85,6 +118,9 @@ function Users() {
   const showDrawer = () => {
     setToggleDrawer(!toggleDrawer);
   };
+
+  const [top, setTop] = useState('topRight');
+  // const [bottom, setBottom] = useState('bottomRight');
 
   return (
     <>
@@ -103,6 +139,7 @@ function Users() {
       }} */
       pagination={{
         pageSize: 15,
+        position: [top],
       }}
     />
     <UserRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} userData={userDetailData} setUserData={setUserDetailData}/>

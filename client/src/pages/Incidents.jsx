@@ -9,6 +9,7 @@ import {
   ClockCircleOutlined,
   ExclamationCircleOutlined,
   SyncOutlined,
+  ReloadOutlined,
 } from "@ant-design/icons";
 import { useState, useEffect } from 'react';
 import { config } from "../utils/Constants";
@@ -91,10 +92,11 @@ function Incidents() {
                 <Tag icon={<ClockCircleOutlined />} key={tag}>
                   {tag.toUpperCase()}
                 </Tag>
+                
               );
             } else if (tag === "In Progress") {
                 return (
-                  <Tag icon={<SyncOutlined spin />} color={"blue"} key={tag}>
+                  <Tag icon={<ReloadOutlined />} color={"blue"} key={tag}>
                     {tag.toUpperCase()}
                   </Tag>
                 );
@@ -112,8 +114,7 @@ function Incidents() {
               );
             }
             
-          })}
-          
+          })}          
         </>
       ),      
     },
@@ -147,6 +148,9 @@ function Incidents() {
     setToggleDrawer(!toggleDrawer);
   };
 
+  const [top, setTop] = useState('topRight');
+  // const [bottom, setBottom] = useState('bottomRight');
+
   return (
     <>
     <Table
@@ -163,6 +167,7 @@ function Incidents() {
       }} */
       pagination={{
         pageSize: 15,
+        position: [top],
       }}
     />
     <IncidentRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData} setIncidentData={setincidentDetailData}/>

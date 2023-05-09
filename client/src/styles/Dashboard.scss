@@ -13,14 +13,16 @@
 
     .layout-right-area {
         margin-left: 80px;
+
         .header {
-            background-color: white;
-            line-height: 55px;
-            height: 55px;
+            background-color: #f5f5f5;
             font-size: 18px;
-            color: $gray;
-            letter-spacing: 0.7px;
-            font-weight: bold;
+            color: #333333;
+            letter-spacing: 1px;
+            font-weight: 500;
+            border-bottom: 1px solid gainsboro;
+            margin: 10px 50px;        
+            line-height: 50px;    
         }
 
         .content {
@@ -43,5 +45,28 @@
 }
 
 .ant-layout-content {
-    //background: #FAFBFD;
+    // background: #FAFBFD;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-menu-inline-collapsed >.ant-menu-item:nth-child(5) {
+    background-color: #0f2536;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 40px;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-menu-inline-collapsed >.ant-menu-item {
+    margin-bottom: 15px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f5f5f5; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.342);
 }

@@ -1,11 +1,11 @@
 :where(.css-dev-only-do-not-override-ph9edi).ant-badge.ant-badge-status .ant-badge-status-dot {
     width: 8px;
     height: 8px;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 :where(.css-dev-only-do-not-override-ph9edi).ant-table-wrapper .ant-table-tbody>tr>td {
-    padding: 8px 16px; 
+    // padding: 8px 16px; 
 }
 
 :where(.css-dev-only-do-not-override-ph9edi).ant-table-wrapper .ant-table-container table>thead>tr:first-child>* {
@@ -46,4 +46,8 @@
     color: rgba(232, 83, 66, 1);
     margin-right: 8px;
     font-size: 13px !important;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-table-wrapper .ant-table-pagination.ant-pagination {
+    margin-top: 0;
 }

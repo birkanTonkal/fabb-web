@@ -111,9 +111,9 @@ function Dashboard() {
           bottom: 0,
         }}
       >
-        <div className="logo-area">
+        <a className="logo-area" href="/dashboard">
           <Logo className="logo" />
-        </div>
+        </a>
 
         <Menu
           theme="dark"
@@ -125,7 +125,7 @@ function Dashboard() {
       </Sider>
 
       <Layout className="layout-right-area" >
-        {/* <Header className="header">{dashboardState.currentPage}</Header> */}
+        <div className="header">{dashboardState.currentPage}</div>
 
         <Content className="content">
          <RenderPage />

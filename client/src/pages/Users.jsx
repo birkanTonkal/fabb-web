@@ -1,12 +1,7 @@
-import { Table, Badge, Tag } from "antd";
-import axios from "axios";
+import { Table, Badge } from "antd";
 import "../styles/Incidents.scss";
 import UserRightPanel from "../components/UserRightPanel";
-import {
-  
-} from "@ant-design/icons";
-import { useState, useEffect } from 'react';
-import { config } from "../utils/Constants";
+import { useState } from 'react';
 
 function Users(props) {
 

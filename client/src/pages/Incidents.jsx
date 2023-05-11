@@ -1,5 +1,4 @@
 import { Table, Badge, Tag } from "antd";
-import axios from "axios";
 import "../styles/Incidents.scss";
 import IncidentRightPanel from "../components/IncidentRightPanel";
 import {
@@ -8,11 +7,9 @@ import {
   CheckCircleOutlined,
   ClockCircleOutlined,
   ExclamationCircleOutlined,
-  SyncOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { useState, useEffect } from 'react';
-import { config } from "../utils/Constants";
+import { useState } from 'react';
 
 function Incidents(props) {
 

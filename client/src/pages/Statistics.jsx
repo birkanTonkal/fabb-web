@@ -1,5 +1,5 @@
 import { Card, Col, Row, Statistic } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PieChart from '../components/PieChart'
 
 function Statistics(props) {

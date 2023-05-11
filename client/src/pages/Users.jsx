@@ -8,8 +8,10 @@ import {
 import { useState, useEffect } from 'react';
 import { config } from "../utils/Constants";
 
-function Users() {
+function Users(props) {
 
+  const {userData} = props;
+  
   const columns = [
     {
       title: "Full Name",
@@ -86,34 +88,12 @@ function Users() {
             
           })}
         </>
-      ),
-              
+      ),              
     },
 ];
-  const [userData, setUserData] = useState([])
+
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [userDetailData, setUserDetailData] = useState({})
-
-  const fetchUserData = async () => {
-    const res = await axios.get(
-      `${config.URL}/user`
-    );
-    let users = res.data
-    let fixedList = [];
-    //console.log(res.data)
-    let key = 0
-    for(const userId in users) {
-      users[userId].user_type =[users[userId].user_type]
-      users[userId].key = key
-      users[userId].create_date = new Date(users[userId].create_date).toLocaleDateString();
-      fixedList.push(users[userId])
-    }
-    setUserData(fixedList)
-     
-  }
-  useEffect( () => {
-    fetchUserData();
-  }, [])
   
   const showDrawer = () => {
     setToggleDrawer(!toggleDrawer);

@@ -110,12 +110,12 @@ const UserRightPanel = (props) => {
       >
         <div className="info-area">
           <p className="title">Account Id</p>
-          <input value={account_id}  disabled={isSuperAdmin} onChange={ (e) => {onInputChange('account_id',e.target.value )}}/>    
+          <input value={account_id}  disabled={!isSuperAdmin} onChange={ (e) => {onInputChange('account_id',e.target.value )}}/>    
         </div>
 
         <div className="info-area">
           <p className="title">User Id</p>
-          <input value={user_id}  disabled={isSuperAdmin} onChange={ (e) => {onInputChange('user_id',e.target.value )}}/>    
+          <input value={user_id}  disabled={!isSuperAdmin} onChange={ (e) => {onInputChange('user_id',e.target.value )}}/>    
         </div>
 
         <div className="info-area">

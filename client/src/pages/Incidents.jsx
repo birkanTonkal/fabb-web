@@ -14,7 +14,9 @@ import {
 import { useState, useEffect } from 'react';
 import { config } from "../utils/Constants";
 
-function Incidents() {
+function Incidents(props) {
+
+  const {incidentData} = props;
 
   const columns = [
     {
@@ -119,30 +121,9 @@ function Incidents() {
       ),      
     },
 ];
-  const [incidentData, setIncidentData] = useState([])
+
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [incidentDetailData, setincidentDetailData] = useState({})
-
-  const fetchIncidentData = async () => {
-    const res = await axios.get(
-      `${config.URL}/incident`
-    );
-    let incidents = res.data
-    let fixedList = [];
-    //console.log(res.data)
-    let key = 0
-    for(const incidentId in incidents) {
-      incidents[incidentId].incident_status =[incidents[incidentId].incident_status]
-      incidents[incidentId].key = key
-      fixedList.push(incidents[incidentId])
-      key += 1
-    }
-    setIncidentData(fixedList)
-     
-  }
-  useEffect( () => {
-    fetchIncidentData();
-  }, [])
   
   const showDrawer = () => {
     setToggleDrawer(!toggleDrawer);

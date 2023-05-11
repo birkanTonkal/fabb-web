@@ -79,22 +79,64 @@ function Dashboard() {
     navigate("/signup", { replace: true });
   }
   const [collapsed, setCollapsed] = useState(true);
-  
+
+  const [incidentData, setIncidentData] = useState([])
+  const fetchIncidentData = async () => {
+    const res = await axios.get(
+      `${config.URL}/incident`
+    );
+    let incidents = res.data
+    let fixedList = [];
+    //console.log(res.data)
+    let key = 0
+    for(const incidentId in incidents) {
+      incidents[incidentId].incident_status =[incidents[incidentId].incident_status]
+      incidents[incidentId].key = key
+      fixedList.push(incidents[incidentId])
+      key += 1
+    }
+    setIncidentData(fixedList)     
+  }
+  useEffect( () => {
+    fetchIncidentData();
+  }, [])
+
+  const [userData, setUserData] = useState([])
+  const fetchUserData = async () => {
+    const res = await axios.get(
+      `${config.URL}/user`
+    );
+    let users = res.data
+    let fixedList = [];
+    //console.log(res.data)
+    let key = 0
+    for(const userId in users) {
+      users[userId].user_type =[users[userId].user_type]
+      users[userId].key = key
+      users[userId].create_date = new Date(users[userId].create_date).toLocaleDateString();
+      fixedList.push(users[userId])
+    }
+    setUserData(fixedList)     
+  }
+  useEffect( () => {
+    fetchUserData();
+  }, [])
+
   const RenderPage = () => {
     switch(dashboardState.currentPage) {
       case 'Users':
-        return <Users />
+        return <Users userData={userData}/>
       case 'Incidents':
-        return <Incidents />
+        return <Incidents incidentData={incidentData}/>
       case 'Statistics':
-        return <Statistics />
+        return <Statistics incidentData={incidentData} userData={userData}/>
       case 'Contact Us':
         return <ContactUs />
       default:
-        return <Statistics />
-    }
-   
+        return <Statistics incidentData={incidentData} userData={userData}/>
+    }   
   }
+
   return (
     <Layout className="container">
       <Sider
@@ -111,7 +153,8 @@ function Dashboard() {
           bottom: 0,
         }}
       >
-        <a className="logo-area" href="/dashboard">
+        
+        <a className="logo-area" href="*">
           <Logo className="logo" />
         </a>
 

@@ -27,12 +27,12 @@ const StackedBar = (props) => {
     data,
     xField: 'type',
     yField: 'Count',
-    minColumnWidth: 50,
-    maxColumnWidth: 50,
-    color: '#1A374D'
+    minColumnWidth: 8,
+    maxColumnWidth: 40,
+    color: '#b9b7c4',
   };
   
-  return <Column {...config} height={250}/>;
+  return <Column {...config} height={300}/>;
 };
 
 export default StackedBar;

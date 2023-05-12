@@ -28,6 +28,40 @@ function Statistics(props) {
     }
   }
 
+  const superAdminTitle = <Breadcrumb
+    items={[
+      {
+        href: '',
+        title: (
+          <>
+            <UsergroupAddOutlined />
+            <span>Users</span>
+          </>
+        ),
+      },
+      {
+        title: 'Super admin',
+      },
+    ]}
+  />
+
+  const adminTitle = <Breadcrumb
+    items={[
+      {
+        href: '',
+        title: (
+          <>
+            <UsergroupAddOutlined />
+            <span>Users</span>
+          </>
+        ),
+      },
+      {
+        title: 'Admin',
+      },
+    ]}
+  />
+
   const customerTitle = <Breadcrumb
     items={[
       {
@@ -40,7 +74,7 @@ function Statistics(props) {
         ),
       },
       {
-        title: 'Number of customer user',
+        title: 'Customer',
       },
     ]}
   />
@@ -57,7 +91,7 @@ function Statistics(props) {
         ),
       },
       {
-        title: 'Number of normal user',
+        title: 'Normal',
       },
     ]}
   />
@@ -82,46 +116,54 @@ function Statistics(props) {
   return (
     <div>
       <Row gutter={[16, 16]} className='row'>
-        <Col span={8}>
+        <Col span={6}>
           <Card>
             <Statistic
+              title={superAdminTitle}
+              value={super_admin}
+            />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card>
+            <Statistic
+              title={adminTitle}
+              value={admin}
+            />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card>
+          <Statistic
               title={customerTitle}
               value={customer}
             />
           </Card>
-        </Col>
-        <Col span={8}>
+        </Col>   
+        <Col span={6}>
           <Card>
-            <Statistic
+          <Statistic
               title={normalTitle}
               value={normal}
             />
           </Card>
+        </Col>  
+
+        <Col span={24} md={10}>
+            <Card><StackedBar super_admin={super_admin} admin={admin} customer={customer} normal={normal}/></Card>
         </Col>
-        <Col span={8}>
+        <Col span={24} md={14}>
+            <Card><PieChart incidentData={incidentData}/></Card>
+        </Col>
+
+        <Col span={24}>
           <Card>
           <Statistic
               title={incidentTitle}
               value={[incidentData.length]}
             />
           </Card>
-        </Col>   
-
-        <Col span={24} md={12}>
-            <Card><StackedBar super_admin={super_admin} admin={admin} customer={customer} normal={normal}/></Card>
-        </Col>
-        <Col span={24} md={12}>
-            <Card><PieChart incidentData={incidentData}/></Card>
-        </Col>
-
-        <Col span={24}>
-          <Card>
-            <Statistic
-              title={customerTitle}
-              value={customer}
-            />
-          </Card>
-        </Col>
+        </Col>  
       </Row>
 
     </div>

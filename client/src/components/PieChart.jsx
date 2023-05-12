@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Pie } from '@ant-design/plots';
+import { Pie, G2 } from '@ant-design/plots';
 import "../styles/Statistics.scss";
 
 function PieChart(props) {
@@ -23,6 +23,7 @@ function PieChart(props) {
     }
   }
 
+  const G = G2.getEngine('canvas');
   const data = [
     {
       type: 'In progress',
@@ -41,29 +42,61 @@ function PieChart(props) {
       value: rejected,
     },
   ];
-  const config = {
+
+  const cfg = {
     appendPadding: 5,
     data,
     angleField: 'value',
     colorField: 'type',
-    color:['#448FDA','rgba(0, 0, 0, 0.65)', '#33AE10','#E85342'],   
-    radius: 1,
+    // color:['#448FDA','rgba(0, 0, 0, 0.65)', '#33AE10','#E85342'],
+    color:['#548de6','#8c8c8c', '#76bd56','#df5e68'],
+    radius: 0.8,
+    legend: false,
     label: {
-      type: 'inner',
-      offset: '-30%',
-      content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
-      style: {
-        fontSize: 14,
-        textAlign: 'center',
+      type: 'spider',
+      formatter: (data, mappingData) => {
+        const group = new G.Group({});
+        group.addShape({
+          type: 'circle',
+          attrs: {
+            x: 10,
+            y: 0,
+            width: 40,
+            height: 50,
+            r: 5,
+            fill: mappingData.color,
+          },
+        });
+        group.addShape({
+          type: 'text',
+          attrs: {
+            x: 20,
+            y: 7,
+            text: `${data.type}`,
+            fill: mappingData.color,
+          },
+        });
+        group.addShape({
+          type: 'text',
+          attrs: {
+            x: 5,
+            y: 25,
+            text: `${parseFloat(data.percent * 100).toFixed(2)}%`,
+            fill: 'rgba(0, 0, 0, 0.65)',
+            fontWeight: 700,
+          },
+        });
+        return group;
       },
     },
     interactions: [
       {
-        type: 'element-active',
+        type: 'element-selected',
       },
     ],
   };
-  return <Pie {...config} height={250}/>;
+  const config = cfg;
+  return <Pie {...config} height={300}/>;
 };
 
 export default PieChart;

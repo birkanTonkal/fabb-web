@@ -4,8 +4,8 @@ import "../styles/Statistics.scss";
 
 function PieChart(props) {
 
+  const G = G2.getEngine('canvas');
   const {incidentData} = props;
-
   let opened = 0, rejected = 0, in_progress = 0, solved = 0;
 
   for(let j = 0; j< incidentData.length; j++) {
@@ -23,7 +23,6 @@ function PieChart(props) {
     }
   }
 
-  const G = G2.getEngine('canvas');
   const data = [
     {
       type: 'In progress',
@@ -48,7 +47,6 @@ function PieChart(props) {
     data,
     angleField: 'value',
     colorField: 'type',
-    // color:['#448FDA','rgba(0, 0, 0, 0.65)', '#33AE10','#E85342'],
     color:['#548de6','#8c8c8c', '#76bd56','#df5e68'],
     radius: 0.8,
     legend: false,

@@ -1,38 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Column } from '@ant-design/plots';
+import { Column, Bar } from '@ant-design/plots';
 
 const StackedBar = (props) => {
 
-  const {super_admin, admin, customer, normal} = props;
-  const data = [
-    {
-      type: 'Super Admin',
-      Count: super_admin,
-    },
-    {
-      type: 'Admin',
-      Count: admin,
-    },
-    {
-      type: 'Customer',
-      Count: customer,
-    },
-    {
-      type: 'Normal',
-      Count: normal,
-    },
-  ];
+  const {incidentData} = props;
+  let categories = [];
+  const data = [];
+  var obj = {}
+
+  function countDuplicateStrings(arr) {
+    let count = {};
+  
+    arr.forEach(function(item) {
+      if (count[item]) {
+        count[item]++;
+      } else {
+        count[item] = 1;
+      }
+    });
+  
+    return count;
+  }  
+
+  for(let i = 0; i< incidentData.length; i++) {
+    categories.push(incidentData[i].category);
+  }
+
+  let duplicateCounts = countDuplicateStrings(categories);
+ 
+  for (let key in duplicateCounts) {
+    let value = duplicateCounts[key];
+
+    obj = { type: key, total: value };
+    data.push(obj)
+  }  
+
   const config = {
     data,
-    xField: 'type',
-    yField: 'Count',
-    minColumnWidth: 8,
-    maxColumnWidth: 40,
-    color: '#b9b7c4',
+    xField: 'total',
+    yField: 'type',
+    color: '#1A374D',
+    yAxis: {
+      label: {
+        autoRotate: false,
+      },
+    },
+    scrollbar: {
+      type: 'vertical',
+    },
+    minBarWidth: 8,
+    maxBarWidth: 12,
+    // minColumnWidth: 8,
+    // maxColumnWidth: 12,
+    
+    // xAxis: {
+    //   label: {
+    //     autoHide: false,
+    //     autoRotate: true,
+    //   },
+    // },
+    // slider: {
+    //   start: 0,
+    //   end: 0.5,
+    // },
   };
   
-  return <Column {...config} height={300}/>;
+  return <Bar {...config} height={300}/>;
 };
 
 export default StackedBar;

@@ -1,4 +1,4 @@
-import { Card, Col, Row, Statistic, Breadcrumb } from 'antd';
+import { Card, Col, Row, Statistic, Breadcrumb, Badge } from 'antd';
 import React from 'react';
 import PieChart from '../components/PieChart'
 import StackedBar from '../components/StackedBar'
@@ -40,7 +40,12 @@ function Statistics(props) {
         ),
       },
       {
-        title: 'Super admin',
+        title:
+        (
+          <>
+            <Badge status="error" />Super admin 
+          </>
+        ),
       },
     ]}
   />
@@ -57,7 +62,12 @@ function Statistics(props) {
         ),
       },
       {
-        title: 'Admin',
+        title:
+        (
+          <>
+            <Badge status="warning" />Admin
+          </>
+        ),
       },
     ]}
   />
@@ -74,7 +84,12 @@ function Statistics(props) {
         ),
       },
       {
-        title: 'Customer',
+        title:
+        (
+          <>
+            <Badge status="success" />Customer
+          </>
+        ),
       },
     ]}
   />
@@ -91,7 +106,12 @@ function Statistics(props) {
         ),
       },
       {
-        title: 'Normal',
+        title:
+        (
+          <>
+            <Badge status="default" />Normal
+          </>
+        ),
       },
     ]}
   />
@@ -149,10 +169,10 @@ function Statistics(props) {
           </Card>
         </Col>  
 
-        <Col span={24} md={10}>
-            <Card><StackedBar super_admin={super_admin} admin={admin} customer={customer} normal={normal}/></Card>
+        <Col span={24} lg={14}>
+            <Card><StackedBar incidentData={incidentData}/></Card>
         </Col>
-        <Col span={24} md={14}>
+        <Col span={24} lg={10}>
             <Card><PieChart incidentData={incidentData}/></Card>
         </Col>
 

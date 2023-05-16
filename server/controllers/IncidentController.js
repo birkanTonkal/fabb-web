@@ -15,7 +15,7 @@ exports.createIncident = async (req, res) => {
             category: req.body.category,
             description: req.body.description,
             location: req.body.location,
-            address: '',
+            address: req.body.address,
             attachments: req.body.attachments,
             report_number: req.body.report_number || "",
             vote_counts: { upvote_count: req.body.upvote_count, downvote_count: req.body.downvote_count },

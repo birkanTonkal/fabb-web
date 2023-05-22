@@ -68,9 +68,9 @@ async function sendFiles(authClient, file) {
       requestBody,
       media: media,
     });
-    console.log('File Id:', file.data);
     let url = await generatePublicUrl(file.data.id, service)
-    return url.webViewLink;
+    console.log(url.webViewLink)
+    return url;
   } catch (err) {
     // TODO(developer) - Handle error
     console.log(err)
@@ -167,7 +167,8 @@ async function generatePublicUrl(id, drive) {
                 fileId: fileId,
                 fields: 'webViewLink, webContentLink',
             });
-          console.log(result.data);
+          //console.log(result.data);
+            return result.data
         } catch (error) {
           console.log(error.message);
         }

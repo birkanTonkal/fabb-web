@@ -1,12 +1,16 @@
 const { db, auth } = require('../firebase/database');
 const admin = require('firebase-admin');
 const { validationResult } = require('express-validator');
+const { authorizeDrive } = require('../drive/drive');
+const {google} = require('googleapis');
+const fs = require('fs');
+const {GoogleAuth} = require('google-auth-library');
 
 
 let startAtRef = null
 exports.createIncident = async (req, res) => {
     try {
-        console.log(req.files);
+        //console.log(req.files);
         const ref = db.ref('incidents');
         const incidentData = {
             user_id: req.body.user_id,
@@ -22,6 +26,13 @@ exports.createIncident = async (req, res) => {
             incident_status: req.body.incident_status,
             create_date: new Date().toLocaleDateString(),
         };
+        try {
+            let driveClient = await authorizeDrive();
+            let fileResponse = await sendFiles(driveClient, req.files);
+        }
+        catch (e) {
+            console.log(e);
+        }
         let insertedData = ref.push(incidentData);
 
         let incident_id = insertedData.getKey();
@@ -36,6 +47,33 @@ exports.createIncident = async (req, res) => {
         res.send(err);
     }
 };
+
+async function sendFiles(authClient, file) {
+    const auth = new GoogleAuth({
+        scopes: 'https://www.googleapis.com/auth/drive',
+      });
+    const service = google.drive({version: 'v3', auth: authClient});
+    const requestBody = {
+    name: `${file.filename}.jpg`,
+    fields: 'id',
+  };
+
+  const media = {
+    mimeType: 'image/jpeg',
+    body: fs.createReadStream(file[0].path),
+  };
+  try {
+    const file = await service.files.create({
+      requestBody,
+      media: media,
+    });
+    console.log('File Id:', file.data);
+    return file.data;
+  } catch (err) {
+    // TODO(developer) - Handle error
+    console.log(err)
+  }
+}
 
 exports.getAllIncidents = async (req, res) => {
     try {

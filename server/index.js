@@ -7,6 +7,10 @@ const app = express();
 // parse application/x-www-form-urlencoded
 app.use(cors({ origin: '*' }), bodyParser.urlencoded({ extended: false }));
 
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
 // parse application/json
 app.use(bodyParser.json());
 

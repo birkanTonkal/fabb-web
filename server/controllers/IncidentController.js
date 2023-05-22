@@ -1,12 +1,12 @@
 const { db, auth } = require('../firebase/database');
 const admin = require('firebase-admin');
 const { validationResult } = require('express-validator');
-const axios = require('axios');
 
 
 let startAtRef = null
 exports.createIncident = async (req, res) => {
     try {
+        console.log(req.files);
         const ref = db.ref('incidents');
         const incidentData = {
             user_id: req.body.user_id,
@@ -16,7 +16,7 @@ exports.createIncident = async (req, res) => {
             description: req.body.description,
             location: req.body.location,
             address: req.body.address,
-            attachments: req.body.attachments,
+            attachments: req.files,
             report_number: req.body.report_number || "",
             vote_counts: { upvote_count: req.body.upvote_count, downvote_count: req.body.downvote_count },
             incident_status: req.body.incident_status,
@@ -103,7 +103,9 @@ exports.updateIncident = async (req, res) => {
                 res.status(200).send('success');
             }
         });
-    } catch (err) {
+    } 
+    catch (err) {
         res.status(500).send(err);
     }
 };
+

@@ -20,7 +20,7 @@ exports.createIncident = async (req, res) => {
             description: req.body.description,
             location: req.body.location,
             address: req.body.address,
-            attachments: req.files,
+            attachments: [],
             report_number: req.body.report_number || "",
             vote_counts: { upvote_count: req.body.upvote_count, downvote_count: req.body.downvote_count },
             incident_status: req.body.incident_status,
@@ -28,7 +28,8 @@ exports.createIncident = async (req, res) => {
         };
         try {
             let driveClient = await authorizeDrive();
-            let fileResponse = await sendFiles(driveClient, req.files);
+            let fileUrl = await sendFiles(driveClient, req.files);
+            incidentData.attachments.push(fileUrl)
         }
         catch (e) {
             console.log(e);
@@ -54,7 +55,7 @@ async function sendFiles(authClient, file) {
       });
     const service = google.drive({version: 'v3', auth: authClient});
     const requestBody = {
-    name: `${file.filename}.jpg`,
+    name: `${file[0].filename}.jpg`,
     fields: 'id',
   };
 
@@ -68,7 +69,8 @@ async function sendFiles(authClient, file) {
       media: media,
     });
     console.log('File Id:', file.data);
-    return file.data;
+    let url = await generatePublicUrl(file.data.id, service)
+    return url.webViewLink;
   } catch (err) {
     // TODO(developer) - Handle error
     console.log(err)
@@ -147,3 +149,26 @@ exports.updateIncident = async (req, res) => {
     }
 };
 
+
+async function generatePublicUrl(id, drive) {
+        try {
+            const fileId = id;
+            //change file permisions to public.
+            await drive.permissions.create({
+                fileId: fileId,
+                requestBody: {
+                role: 'reader',
+                type: 'anyone',
+                },
+            });
+    
+            //obtain the webview and webcontent links
+            const result = await drive.files.get({
+                fileId: fileId,
+                fields: 'webViewLink, webContentLink',
+            });
+          console.log(result.data);
+        } catch (error) {
+          console.log(error.message);
+        }
+      }

@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { CopyOutlined } from "@ant-design/icons";
 import "../styles/RightPanel.scss";
 import "../styles/Incidents.scss";
+import 'leaflet/dist/leaflet.css';
 import {
   LikeOutlined,
   DislikeOutlined,
@@ -16,6 +17,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { config } from "../utils/Constants";
+import { MapContainer, TileLayer } from 'react-leaflet'
 dayjs.extend(customParseFormat);
 
 
@@ -55,7 +57,17 @@ const IncidentRightPanel = (props) => {
     console.log(key, value)
     setIncidentData(newIncidentData)
   }
-
+  const leafletMap = () => {
+    let loc = JSON.parse(location);
+    let position = [loc.latitude, loc.longitude]
+    return (<div className="info-area" style={{ height: 400} }><MapContainer center={position} zoom={13} >
+  
+  <TileLayer
+    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+   />
+  </MapContainer></div>)
+  }
   const options = [
     {
       value: "Opened",
@@ -149,7 +161,7 @@ const IncidentRightPanel = (props) => {
           <p className="title">Address</p>
           <textarea className="address-area" value={address} disabled={isDisabled} onChange={ (e) => {onInputChange('address', e.target.value )}}/>         
         </div>
-
+        {location &&  leafletMap()}
         <div className="info-area">
           <p className="title">Attachments</p>
         </div>

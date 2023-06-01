@@ -1,5 +1,5 @@
 
-const isDevelopment = true;
+const isDevelopment = false;
 
 const development = {
     URL: 'http://localhost:5111'

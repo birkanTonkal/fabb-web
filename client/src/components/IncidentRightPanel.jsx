@@ -39,8 +39,9 @@ const IncidentRightPanel = (props) => {
     title,
     user_id,
     vote_counts,
+    attachments
   } = incidentData;
-
+  console.log(attachments)
   const copy = async () => {
     await navigator.clipboard.writeText(report_number);
 
@@ -51,14 +52,16 @@ const IncidentRightPanel = (props) => {
   };
 
   const onInputChange = (key, value) => {
-    let newIncidentData = {...incidentData, vote_counts: {...incidentData.vote_counts}, location: {...incidentData.location}, 
+    let newIncidentData = {...incidentData, vote_counts: {...incidentData.vote_counts}, location: incidentData.location, 
       incident_status: incident_status}
     newIncidentData[key] = value;
     console.log(key, value)
     setIncidentData(newIncidentData)
   }
   const leafletMap = () => {
+    console.log(location)
     let loc = JSON.parse(location);
+  
     let position = [loc.latitude, loc.longitude]
     return (<div className="info-area" style={{ height: 400} }><MapContainer center={position} zoom={13} >
   
@@ -88,14 +91,19 @@ const IncidentRightPanel = (props) => {
   ];
 
   const updateIncident = async function(updateIncident) {
+    console.log(updateIncident)
     if (isArray(updateIncident.incident_status)) { updateIncident.incident_status = updateIncident.incident_status[0]}
     axios.put(`${config.URL}/incident/update`, updateIncident).
         then(e => {console.log('success', e)}).
         catch(e => {console.log('zart', e)})
   }
     
-  const deleteIncident = () => {
-
+  const deleteIncident = (incident_id) => {
+    axios.delete(`${config.URL}/incident/${incident_id}`).then(e => {
+      console.log(e)
+    }).catch(e => {
+      console.log(e)
+    })
   }
 
   const isDisabled = userType == 'admin' || 'super_admin' ? false : true;
@@ -180,7 +188,7 @@ const IncidentRightPanel = (props) => {
         <div className="bottom-area">
           <Button className="update-btn" onClick={() => {updateIncident(incidentData)}}><CheckOutlined /> Save</Button>
           
-          { isAdmin ? <Button className="delete-btn" onClick={() => {deleteIncident()}}><DeleteOutlined /> Delete</Button> : null }
+          { isAdmin ? <Button className="delete-btn" onClick={() => {deleteIncident(incidentData.incident_id)}}><DeleteOutlined /> Inactive</Button> : null }
        
         </div>
 

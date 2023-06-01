@@ -171,7 +171,7 @@ const IncidentRightPanel = (props) => {
           <p className="title">Address</p>
           <textarea className="address-area" value={address} disabled={isDisabled} onChange={ (e) => {onInputChange('address', e.target.value )}}/>         
         </div>
-        {location &&  leafletMap()}
+        {/* {location &&  leafletMap()} */}
         <div className="info-area">
           <p className="title">Attachments</p>
           <img className="incident_image" src={ Array.isArray(attachments) && `https://drive.google.com/uc?export=view&id=${attachments[0].webViewLink.split('/')[5]}`  }  alt="" />

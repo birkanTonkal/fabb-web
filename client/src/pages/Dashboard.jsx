@@ -11,13 +11,15 @@ import {
   BarChartOutlined,
   PhoneOutlined,
   LogoutOutlined,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import LoginLeftPanel from "../components/LoginLeftPanel";
 import Users from "./Users";
 import Incidents from "./Incidents";
 import Statistics from "./Statistics";
 import ContactUs from "./ContactUs";
+import Profile from "./Profile";
 import axios from "axios";
 import { config } from "../utils/Constants";
 import { loginUser, logoutUser } from "../slices/authSlice";
@@ -47,6 +49,7 @@ function Dashboard() {
   const navigate = useNavigate();
 
   const items = [
+    getItem("Profile", "Profile", <UserOutlined />, 0),
     getItem("Statistics", "Statistics", <BarChartOutlined />, 0),
     getItem("Users", "Users", <UsergroupAddOutlined />, isDisabled),
     getItem("Incidents", "Incidents", <IssuesCloseOutlined />, 0),    
@@ -124,12 +127,14 @@ function Dashboard() {
 
   const RenderPage = () => {
     switch(dashboardState.currentPage) {
+      case 'Profile':
+        return <Profile userData={userData}/>
+      case 'Statistics':
+        return <Statistics incidentData={incidentData} userData={userData}/>
       case 'Users':
         return <Users userData={userData}/>
       case 'Incidents':
-        return <Incidents incidentData={incidentData}/>
-      case 'Statistics':
-        return <Statistics incidentData={incidentData} userData={userData}/>
+        return <Incidents incidentData={incidentData}/>      
       case 'Contact Us':
         return <ContactUs />
       default:

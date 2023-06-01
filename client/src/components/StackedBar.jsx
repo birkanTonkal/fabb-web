@@ -41,7 +41,7 @@ const StackedBar = (props) => {
   const config = {
     xField: 'total',
     yField: 'type',
-    color: '#6f9aad',
+    color: '#c1c2c9',
     // '#1A374D'
     yAxis: {
       label: {
@@ -51,8 +51,8 @@ const StackedBar = (props) => {
     scrollbar: {
       type: 'vertical',
     },
-    minBarWidth: 10,
-    maxBarWidth: 12,
+    minBarWidth: 12,
+    maxBarWidth: 15,
     // minColumnWidth: 8,
     // maxColumnWidth: 12,
     

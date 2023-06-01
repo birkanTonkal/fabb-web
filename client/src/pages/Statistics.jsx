@@ -122,7 +122,7 @@ function Statistics(props) {
         href: '',
         title: (
           <>
-            <IssuesCloseOutlined />
+            <UsergroupAddOutlined />
             <span>Users</span>
           </>
         ),

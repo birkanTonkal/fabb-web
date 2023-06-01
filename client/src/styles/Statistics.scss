@@ -1,33 +1,28 @@
 :where(.css-dev-only-do-not-override-ph9edi).ant-statistic .ant-statistic-content {
-    font-weight: 500;
-    font-size: 50px;
+    font-size: 35px;
     color: #363739;
 }
 
 :where(.css-dev-only-do-not-override-ph9edi).ant-breadcrumb {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 :where(.css-dev-only-do-not-override-ph9edi).ant-card-bordered {
     border: none !important;
 }
 
-.card {
-    margin-bottom: 16px;
+:where(.css-dev-only-do-not-override-ph9edi).ant-card .ant-card-body {
+    padding: 14px 24px;
+    background-color: #fcfafa;
+    box-shadow: rgba(199, 199, 199, 0.2) 0px 2px 5px 0px;
 }
 
-.pie-col {
-    margin-bottom: 16px;
-
-    .pie {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
+.card {
+    margin-bottom: 20px;
+    
 }
 
 .pie-canvas {
-    width: 700px;
+    height: 358px !important;
 }

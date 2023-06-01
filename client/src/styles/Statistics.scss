@@ -1,0 +1,33 @@
+:where(.css-dev-only-do-not-override-ph9edi).ant-statistic .ant-statistic-content {
+    font-weight: 500;
+    font-size: 50px;
+    color: #363739;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-breadcrumb {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-card-bordered {
+    border: none !important;
+}
+
+.card {
+    margin-bottom: 16px;
+}
+
+.pie-col {
+    margin-bottom: 16px;
+
+    .pie {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+}
+
+.pie-canvas {
+    width: 700px;
+}

@@ -48,7 +48,7 @@ function PieChart(props) {
     angleField: 'value',
     colorField: 'type',
     color:['#548de6','#8c8c8c', '#76bd56','#df5e68'],
-    radius: 0.8,
+    radius: 0.7,
     legend: false,
     label: {
       type: 'spider',
@@ -72,16 +72,18 @@ function PieChart(props) {
             y: 7,
             text: `${data.type}`,
             fill: mappingData.color,
+            fontSize: 18,
           },
         });
         group.addShape({
           type: 'text',
           attrs: {
             x: 5,
-            y: 25,
+            y: 35,
             text: `${parseFloat(data.percent * 100).toFixed(2)}%`,
             fill: 'rgba(0, 0, 0, 0.65)',
             fontWeight: 700,
+            fontSize: 16,
           },
         });
         return group;
@@ -94,7 +96,7 @@ function PieChart(props) {
     ],
   };
   const config = cfg;
-  return <Pie {...config} height={300}/>;
+  return <Pie {...config} className='pie-canvas'/>;
 };
 
 export default PieChart;

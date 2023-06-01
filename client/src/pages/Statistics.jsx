@@ -116,6 +116,23 @@ function Statistics(props) {
     ]}
   />
 
+  const userTitle = <Breadcrumb
+    items={[
+      {
+        href: '',
+        title: (
+          <>
+            <IssuesCloseOutlined />
+            <span>Users</span>
+          </>
+        ),
+      },
+      {
+        title: 'Number of users',
+      },
+    ]}
+  />
+
   const incidentTitle = <Breadcrumb
     items={[
       {
@@ -135,57 +152,57 @@ function Statistics(props) {
   
   return (
     <div>
-      <Row gutter={[16, 16]} className='row'>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title={superAdminTitle}
-              value={super_admin}
+      <Row gutter={[16, 16]}>
+        <Col span={12} lg={6}>
+            <Card className='card'>
+              <Statistic
+                title={superAdminTitle}
+                value={super_admin}
+              />
+            </Card>
+            <Card className='card'>
+              <Statistic
+                title={normalTitle}
+                value={normal}
             />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title={adminTitle}
-              value={admin}
-            />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-          <Statistic
-              title={customerTitle}
-              value={customer}
-            />
-          </Card>
-        </Col>   
-        <Col span={6}>
-          <Card>
-          <Statistic
-              title={normalTitle}
-              value={normal}
-            />
-          </Card>
-        </Col>  
-
-        <Col span={24} lg={14}>
-            <Card><StackedBar incidentData={incidentData}/></Card>
-        </Col>
-        <Col span={24} lg={10}>
-            <Card><PieChart incidentData={incidentData}/></Card>
+            </Card>                       
+            <Card className='card'>
+              <Statistic
+                title={userTitle}
+                value={[userData.length]}
+              />
+            </Card>        
         </Col>
 
-        <Col span={24}>
-          <Card>
-          <Statistic
-              title={incidentTitle}
-              value={[incidentData.length]}
-            />
-          </Card>
-        </Col>  
+        <Col span={12} lg={6}>
+            <Card className='card'>
+              <Statistic
+                title={adminTitle}
+                value={admin}
+              />
+            </Card>
+            <Card className='card'>
+              <Statistic
+                  title={customerTitle}
+                  value={customer}
+              />
+            </Card>
+            <Card className='card'>
+              <Statistic
+                  title={incidentTitle}
+                  value={[incidentData.length]}
+              />
+            </Card>
+        </Col>
+
+        <Col span={24} lg={12} className='pie-col'>
+          <Card className='card pie'><PieChart incidentData={incidentData}/></Card>
+        </Col>              
       </Row>
 
+      <Col span={24}>
+          <Card className='card'><StackedBar incidentData={incidentData}/></Card>          
+      </Col>                             
     </div>
   )
 }

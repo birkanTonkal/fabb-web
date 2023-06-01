@@ -41,7 +41,7 @@ const IncidentRightPanel = (props) => {
     vote_counts,
     attachments
   } = incidentData;
-  console.log(attachments)
+ 
   const copy = async () => {
     await navigator.clipboard.writeText(report_number);
 
@@ -51,6 +51,7 @@ const IncidentRightPanel = (props) => {
     });
   };
 
+
   const onInputChange = (key, value) => {
     let newIncidentData = {...incidentData, vote_counts: {...incidentData.vote_counts}, location: incidentData.location, 
       incident_status: incident_status}
@@ -58,6 +59,7 @@ const IncidentRightPanel = (props) => {
     console.log(key, value)
     setIncidentData(newIncidentData)
   }
+
   const leafletMap = () => {
     console.log(location)
     let loc = JSON.parse(location);
@@ -172,6 +174,7 @@ const IncidentRightPanel = (props) => {
         {location &&  leafletMap()}
         <div className="info-area">
           <p className="title">Attachments</p>
+          <img className="incident_image" src={ Array.isArray(attachments) && `https://drive.google.com/uc?export=view&id=${attachments[0].webViewLink.split('/')[5]}`  }  alt="" />
         </div>
 
         <div className="info-area">

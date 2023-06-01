@@ -4,7 +4,7 @@ import "../styles/Profile.scss";
 
 function Profile() {
     const authState = useSelector((state) => state.auth);
-    const userData = authState.user
+    const userData = authState.user;
     console.log(userData)
     
     return (

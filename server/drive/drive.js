@@ -9,9 +9,9 @@ const SCOPES = ['https://www.googleapis.com/auth/drive'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = path.join(process.cwd(), 'drive\\token.json');
+const TOKEN_PATH = path.join(process.cwd(), 'drive\\token.json').replace(/\\/g, '/');
 
-const CREDENTIALS_PATH = path.join(process.cwd(), 'drive\\credentials.json');
+const CREDENTIALS_PATH = path.join(process.cwd(), 'drive\\credentials.json').replace(/\\/g, '/');
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -20,6 +20,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'drive\\credentials.json');
  */
 async function loadSavedCredentialsIfExist() {
   try {
+    
     const content = await fs.readFile(TOKEN_PATH);
     const credentials = JSON.parse(content);
     return google.auth.fromJSON(credentials);

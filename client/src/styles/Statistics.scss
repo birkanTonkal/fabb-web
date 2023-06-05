@@ -22,6 +22,7 @@
     padding: 45px;
 }
 
+// .number-col:where(.css-dev-only-do-not-override-ph9edi).ant-col
 :where(.css-dev-only-do-not-override-ph9edi).ant-col {
     display: flex;
     flex-direction: column;
@@ -37,5 +38,5 @@
 }
 
 .row {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }

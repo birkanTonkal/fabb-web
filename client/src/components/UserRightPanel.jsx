@@ -90,6 +90,7 @@ const UserRightPanel = (props) => {
         console.log(e);
       });
   };
+  
   const deleteUser = async () => {
     console.log(user_id)
     await axios.delete(`${config.URL}/user/delete`, {
@@ -98,8 +99,8 @@ const UserRightPanel = (props) => {
         account_id: account_id,
       }
       })
-
   };
+
   const isDisabled = userType == "admin" || "super_admin" ? false : true;
   const isSuperAdmin = userType == "super_admin" ? true : false;
   const [isModalOpen, setIsModalOpen] = useState(false);

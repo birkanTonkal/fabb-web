@@ -1,7 +1,8 @@
-import { Card, Col, Row, Statistic, Breadcrumb, Badge } from 'antd';
+import { Card, Col, Row, Breadcrumb, Badge } from 'antd';
 import React from 'react';
 import PieChart from '../components/PieChart'
 import StackedBar from '../components/StackedBar'
+import Map from '../components/Map'
 import "../styles/Statistics.scss";
 import {
   UsergroupAddOutlined,
@@ -146,7 +147,7 @@ function Statistics(props) {
   
   return (
     <>
-      <Row gutter={[20, 20]} className='row'>
+      <Row gutter={[16, 16]} className='row'>
         <Col span={16}>
           <Card><StackedBar incidentData={incidentData}/></Card>          
         </Col>
@@ -169,17 +170,19 @@ function Statistics(props) {
         </Col>
       </Row>
 
-      <Row gutter={[20, 20]} className='row'>
+      <Row gutter={[16, 16]} className='row'>
         <Col span={8}>
           <Card><PieChart incidentData={incidentData}/></Card>    
         </Col>
-        <Col span={8}>
+        {/* <Col span={8}>
           <Card></Card>    
         </Col>
         <Col span={8}>
-          <Card></Card> 
-        </Col>
+          <Card><Map/></Card> 
+        </Col> */}
       </Row>
+
+      
     
     </>
   )

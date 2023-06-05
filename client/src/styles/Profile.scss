@@ -1,35 +1,103 @@
-.profile-area {
-    margin-bottom: 40px !important;
-    font-size: 20px;
+.form-card {
+    padding: 50px;
+    height: 100%;
+    box-shadow: none;
 
-    .label {
-        margin-bottom: 8px;
-        font-weight: 500;
-        letter-spacing: 1px;
+    .created-date {
+        color: rgba(163, 163, 163, 1);
+        font-size: 20px;
+        margin-bottom: 80px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ebebeb;
     }
 
-    input {
-        background: #ffffff;
-        border: 1px solid #ebebeb;
-        padding: 12px !important;
-        width: 40%;
+    .created-date input {
+        margin-left: 10px;
+        background: none;
+        border: none;
+    }
+    
+    .profile-label {
+        color: rgba(76, 76, 76, 1);
+        font-weight: 600;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+    
+    .profile-label label {
+        width: 200px;
+        display: block;
+    }
+    
+    .profile-label input {
+        background-color: #F4F4F4;
+        border: 0;
+        border-radius: 10px;
+        padding: 15px;
+        width: 100%;
         outline: none;
-        border-radius: 9px;
+    }
+
+    .profile-label input::placeholder {
+        color: black;
+      }
+    
+    .button-area {
+        display: flex;
+        justify-content: end;
+        margin-top: 60px;
+    }
+    
+    .update-button {
+        color: rgb(255, 255, 255);
+        background: #1A374D;
+        padding: 10px 30px;
+        border-radius: 5px;
+        letter-spacing: 0.5px;
+        border: none;
+        font-size: 20px;
     }
 }
 
-.button-area {
-    width: 40%;
+.time-area:where(.css-dev-only-do-not-override-ph9edi).ant-card .ant-card-body {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
 }
 
-button {
-    color: rgb(255, 255, 255);
-    background: #1A374D;
-    padding: 10px 25px;
-    border-radius: 5px;
-    letter-spacing: 0.5px;
-    border: none;
-    font-size: 20px;
+.card {
+    width: 100%;
+    color: #1A374D;    
+    padding: 20px 0px;
+
+    .time {
+        font-size: 70px;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .date {
+        font-size: 30px;
+        margin: 0;
+        font-weight: 500;
+    }
+}
+
+.col:where(.css-dev-only-do-not-override-ph9edi).ant-col {
+    height: 900px;
+}
+
+.bottom-row {
+    p {
+        font-weight: 500;
+        font-size: 18px;
+        color: rgba(87, 87, 87, 1);
+        letter-spacing: 0.5px;
+    }
+
+    p span {
+        font-weight: 700;
+        font-size: 20px;
+    }
 }

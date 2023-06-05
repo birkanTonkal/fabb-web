@@ -39,36 +39,32 @@ const StackedBar = (props) => {
   const sortedData = [...data].sort((a, b) => b.total - a.total);
 
   const config = {
-    xField: 'total',
-    yField: 'type',
-    color: '#c1c2c9',
-    // '#1A374D'
-    yAxis: {
+    data,
+    xField: 'type',
+    yField: 'total',
+    xAxis: {
       label: {
-        autoRotate: false,
+        autoRotate: true,
       },
     },
-    scrollbar: {
-      type: 'vertical',
+    color: '#6491a4',
+    columnBackground: {
+      style: {
+        fill: '#e3eaef',
+        radius: [5, 5, 0, 0],
+      },      
     },
-    minBarWidth: 12,
-    maxBarWidth: 15,
-    // minColumnWidth: 8,
-    // maxColumnWidth: 12,
-    
-    // xAxis: {
-    //   label: {
-    //     autoHide: false,
-    //     autoRotate: true,
-    //   },
-    // },
-    // slider: {
-    //   start: 0,
-    //   end: 0.5,
-    // },
+    minColumnWidth: 17,
+    maxColumnWidth: 17,
+    label: {
+      content: "",
+    },
+    columnStyle: {
+      radius: [5, 5, 0, 0],
+    },
   };
   
-  return <Bar {...config} data={sortedData} height={300}/>;
+  return <Column {...config} data={sortedData} />;
 };
 
 export default StackedBar;

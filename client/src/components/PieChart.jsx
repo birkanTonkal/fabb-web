@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Pie, G2 } from '@ant-design/plots';
+import { Pie, G2, measureTextWidth } from '@ant-design/plots';
 import "../styles/Statistics.scss";
 
 function PieChart(props) {
@@ -42,48 +42,50 @@ function PieChart(props) {
     },
   ];
 
+ 
   const cfg = {
     appendPadding: 5,
     data,
     angleField: 'value',
     colorField: 'type',
-    color:['#548de6','#8c8c8c', '#76bd56','#df5e68'],
-    radius: 0.9,
-    legend: false,
+    color:['#406882','#d9d9d9', '#709aab','#cf2230'],
+    radius: 0.75,
+    innerRadius: 0.70,
+    legend: true,
     label: {
       type: 'spider',
       formatter: (data, mappingData) => {
         const group = new G.Group({});
-        group.addShape({
-          type: 'circle',
-          attrs: {
-            x: 10,
-            y: 0,
-            width: 40,
-            height: 50,
-            r: 5,
-            fill: mappingData.color,
-          },
-        });
+        // group.addShape({
+        //   type: 'circle',
+        //   attrs: {
+        //     x: 10,
+        //     y: 0,
+        //     width: 40,
+        //     height: 50,
+        //     r: 5,
+        //     fill: mappingData.color,
+        //   },
+        // });
         group.addShape({
           type: 'text',
           attrs: {
-            x: 20,
-            y: 7,
+            x: 5,
+            y: 9,
             text: `${data.type}`,
             fill: mappingData.color,
-            fontSize: 17,
+            fontSize: 18,
           },
         });
         group.addShape({
           type: 'text',
           attrs: {
             x: 5,
-            y: 28,
+            y: 35,
             text: `${parseFloat(data.percent * 100).toFixed(2)}%`,
-            fill: 'rgba(0, 0, 0, 0.65)',
-            fontWeight: 700,
-            fontSize: 14,
+            fill: mappingData.color,
+            fontWeight: 600,
+            fontSize: 18,
           },
         });
         return group;
@@ -96,7 +98,7 @@ function PieChart(props) {
     ],
   };
   const config = cfg;
-  return <Pie {...config} className='pie-canvas'/>;
+  return <Pie {...config} />;
 };
 
 export default PieChart;

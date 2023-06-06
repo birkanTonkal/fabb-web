@@ -98,6 +98,8 @@ const IncidentRightPanel = (props) => {
     axios.put(`${config.URL}/incident/update`, updateIncident).
         then(e => {console.log('success', e)}).
         catch(e => {console.log('zart', e)})
+    
+        message.success("Incident successfully updated");
   }
     
   const deleteIncident = (incident_id) => {
@@ -106,6 +108,8 @@ const IncidentRightPanel = (props) => {
     }).catch(e => {
       console.log(e)
     })
+
+    message.info("Incident successfully inactivated");
   }
 
   const isDisabled = userType == 'admin' || 'super_admin' ? false : true;

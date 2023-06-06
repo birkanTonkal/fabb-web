@@ -56,7 +56,7 @@ function Profile() {
 
                         <div className='profile-label'>
                             <label>Date of Birth</label>
-                            <input type='date' placeholder={userData.date_of_birth}/>
+                            <input placeholder={userData.date_of_birth}/>
                         </div>
 
                         <div className='profile-label'>

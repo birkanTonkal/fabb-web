@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 function Users(props) {
 
-  const {userData} = props;
-  
+  const {userData, userPageRefresher} = props;
+
   const columns = [
     {
       title: "Full Name",
@@ -94,6 +94,8 @@ function Users(props) {
     setToggleDrawer(!toggleDrawer);
   };
 
+
+
   const [top, setTop] = useState('topRight');
   // const [bottom, setBottom] = useState('bottomRight');
 
@@ -105,7 +107,7 @@ function Users(props) {
       dataSource={userData}
       onRow={(record, rowIndex) => {
         return {
-          onClick: (event) => {showDrawer(); setUserDetailData(record)}, // click row
+          onClick: (event) => {showDrawer(); setUserDetailData(record);}, // click row
         };
       }}
       onClick={((e) => {console.log(e)})}
@@ -117,7 +119,7 @@ function Users(props) {
         position: [top],
       }}
     />
-    <UserRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} userData={userDetailData} setUserData={setUserDetailData}/>
+    <UserRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} userData={userDetailData} setUserData={setUserDetailData} userPageRefresher={userPageRefresher}/>
     </>
   );
 }

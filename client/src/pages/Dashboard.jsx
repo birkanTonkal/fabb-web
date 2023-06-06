@@ -40,12 +40,12 @@ function getItem(label, key, icon, bool) {
 
 function Dashboard() {
   const authState = useSelector((state) => state.auth);
+  const [refreshUserPage, setRefreshUserPage] = useState(false);
   const dashboardState = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
   const [currentOpenPage, setCurrentOpenPage] = useState("Statistics");
   const show = JSON.stringify(authState.user);
   const isDisabled = authState.user?.user_type == 'admin' || 'super_admin' ? false : true;
-  console.log(isDisabled)
   const navigate = useNavigate();
 
   const items = [
@@ -62,7 +62,8 @@ function Dashboard() {
         let userId = localStorage.getItem('user_id');
         getUserByUserId(userId)
     }
-  }, [])
+  })
+
   const getUserByUserId = async (userId) => {
     let user = await axios.get( `${config.URL}/user/${userId}`);
     if (user.data) {
@@ -77,10 +78,12 @@ function Dashboard() {
     dispatch(changePage(e.key))
   
   };
+
   const signoutUser = () => {
     dispatch(logoutUser());
     navigate("/signup", { replace: true });
   }
+
   const [collapsed, setCollapsed] = useState(true);
 
   const [incidentData, setIncidentData] = useState([])
@@ -105,6 +108,10 @@ function Dashboard() {
   }, [])
 
   const [userData, setUserData] = useState([])
+
+  const userPageRefresher = () => {
+    setRefreshUserPage(!refreshUserPage);
+  }
   const fetchUserData = async () => {
     const res = await axios.get(
       `${config.URL}/user`
@@ -119,11 +126,13 @@ function Dashboard() {
       users[userId].create_date = new Date(users[userId].create_date).toLocaleDateString();
       fixedList.push(users[userId])
     }
+    console.log(fixedList)
     setUserData(fixedList)     
   }
+
   useEffect( () => {
     fetchUserData();
-  }, [])
+  }, [refreshUserPage])
 
   const RenderPage = () => {
     switch(dashboardState.currentPage) {
@@ -132,7 +141,7 @@ function Dashboard() {
       case 'Statistics':
         return <Statistics incidentData={incidentData} userData={userData}/>
       case 'Users':
-        return <Users userData={userData}/>
+        return <Users userData={userData} userPageRefresher={userPageRefresher}  />
       case 'Incidents':
         return <Incidents incidentData={incidentData}/>      
       case 'Contact Us':

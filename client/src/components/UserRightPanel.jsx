@@ -16,7 +16,7 @@ const UserRightPanel = (props) => {
   const authState = useSelector((state) => state.auth);
   const userType = authState.user_type;
   const inputRef = useRef({});
-  const { showDrawer, userData, toggleDrawer, setUserData } = props;
+  const { showDrawer, userData, toggleDrawer, setUserData, userPageRefresher } = props;
   const {
     account_id,
     create_date,
@@ -84,6 +84,7 @@ const UserRightPanel = (props) => {
     axios
       .put(`${config.URL}/user/update`, updateUser)
       .then((e) => {
+        userPageRefresher();
         console.log("success", e);
       })
       .catch((e) => {
@@ -208,6 +209,7 @@ const UserRightPanel = (props) => {
             size="large"
             style={{ width: "85%" }}
             onChange={(data) => {
+              console.log(data)
               onInputChange("user_type", data[0]);
             }}
           />
@@ -216,8 +218,11 @@ const UserRightPanel = (props) => {
         <div className="bottom-area">
           <Button
             className="update-btn"
-            onClick={() => {
-              updateUser(userData);
+            onClick={ async () => {
+              console.log("ANAN", userData)
+              await updateUser(userData);
+
+            
             }}
           >
             <CheckOutlined /> Save

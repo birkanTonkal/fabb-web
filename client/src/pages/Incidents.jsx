@@ -13,7 +13,7 @@ import { useState } from 'react';
 
 function Incidents(props) {
 
-  const {incidentData} = props;
+  const {incidentData,incidentPageRefresher} = props;
 
   const columns = [
     {
@@ -148,7 +148,7 @@ function Incidents(props) {
         position: [top],
       }}
     />
-    <IncidentRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData} setIncidentData={setincidentDetailData}/>
+    <IncidentRightPanel toggleDrawer={toggleDrawer} showDrawer={showDrawer} incidentData={incidentDetailData} setIncidentData={setincidentDetailData} incidentPageRefresher={incidentPageRefresher}/>
     </>
   );
 }

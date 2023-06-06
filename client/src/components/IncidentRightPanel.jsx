@@ -26,7 +26,7 @@ const IncidentRightPanel = (props) => {
   const userType = authState.user_type;
   const isAdmin = userType == 'admin' || 'super_admin' ? true : false 
   const inputRef = useRef({})
-  const { showDrawer, incidentData, toggleDrawer, setIncidentData } = props;
+  const { showDrawer, incidentData, toggleDrawer, setIncidentData, incidentPageRefresher } = props;
   const {
     address,
     category,
@@ -96,12 +96,16 @@ const IncidentRightPanel = (props) => {
     console.log(updateIncident)
     if (isArray(updateIncident.incident_status)) { updateIncident.incident_status = updateIncident.incident_status[0]}
     axios.put(`${config.URL}/incident/update`, updateIncident).
-        then(e => {console.log('success', e)}).
+        then(e => {
+          console.log('success', e)
+          incidentPageRefresher()
+        }).
         catch(e => {console.log('zart', e)})
   }
     
   const deleteIncident = (incident_id) => {
     axios.delete(`${config.URL}/incident/${incident_id}`).then(e => {
+      incidentPageRefresher();
       console.log(e)
     }).catch(e => {
       console.log(e)
@@ -189,9 +193,9 @@ const IncidentRightPanel = (props) => {
         </div>
 
         <div className="bottom-area">
-          <Button className="update-btn" onClick={() => {updateIncident(incidentData)}}><CheckOutlined /> Save</Button>
+          <Button className="update-btn" onClick={ async () => {await updateIncident(incidentData)}}><CheckOutlined /> Save</Button>
           
-          { isAdmin ? <Button className="delete-btn" onClick={() => {deleteIncident(incidentData.incident_id)}}><DeleteOutlined /> Inactive</Button> : null }
+          { isAdmin ? <Button className="delete-btn" onClick={ async () => { await deleteIncident(incidentData.incident_id)}}><DeleteOutlined /> Inactive</Button> : null }
        
         </div>
 

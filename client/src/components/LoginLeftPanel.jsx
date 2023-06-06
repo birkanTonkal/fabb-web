@@ -5,7 +5,7 @@ function LoginLeftPanel() {
   return (
     <>
       <div className="texts">
-        <div className="text">Join Our Community</div>
+        <div className="text">Join Our Family</div>
         <div className="fabb-text">Made by ● Fabbsoft</div>
       </div>
     </>

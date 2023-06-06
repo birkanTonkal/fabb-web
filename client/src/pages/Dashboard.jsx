@@ -103,15 +103,20 @@ function Dashboard() {
     }
     setIncidentData(fixedList)     
   }
-  useEffect( () => {
-    fetchIncidentData();
-  }, [])
-
+ 
   const [userData, setUserData] = useState([])
+  const [refreshIncidentPage, setRefreshIncidentPage] = useState(false);
 
+  const incidentPageRefresher = () => {
+    setRefreshIncidentPage(!refreshIncidentPage)
+  }
   const userPageRefresher = () => {
     setRefreshUserPage(!refreshUserPage);
   }
+  useEffect( () => {
+    fetchIncidentData();
+  }, [refreshIncidentPage])
+
   const fetchUserData = async () => {
     const res = await axios.get(
       `${config.URL}/user`
@@ -126,7 +131,6 @@ function Dashboard() {
       users[userId].create_date = new Date(users[userId].create_date).toLocaleDateString();
       fixedList.push(users[userId])
     }
-    console.log(fixedList)
     setUserData(fixedList)     
   }
 
@@ -143,7 +147,7 @@ function Dashboard() {
       case 'Users':
         return <Users userData={userData} userPageRefresher={userPageRefresher}  />
       case 'Incidents':
-        return <Incidents incidentData={incidentData}/>      
+        return <Incidents incidentData={incidentData} incidentPageRefresher={incidentPageRefresher} />      
       case 'Contact Us':
         return <ContactUs />
       default:

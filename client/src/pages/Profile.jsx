@@ -90,7 +90,7 @@ function Profile() {
 
                 <Row className='bottom-row'>
                     <Card className='card map-card'>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12236.432417743603!2d32.8381964!3d39.9389715!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34e563846dcab%3A0xa1cab2c838993817!2sT.C.%20Ankara%20B%C3%BCy%C3%BCk%C5%9Fehir%20Belediyesi!5e0!3m2!1str!2str!4v1685999701517!5m2!1str!2str" width={800} height={420}></iframe>
+                        <iframe frameBorder={0} src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12236.432417743603!2d32.8381964!3d39.9389715!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34e563846dcab%3A0xa1cab2c838993817!2sT.C.%20Ankara%20B%C3%BCy%C3%BCk%C5%9Fehir%20Belediyesi!5e0!3m2!1str!2str!4v1685999701517!5m2!1str!2str" width={800} height={420}></iframe>
                         <p><span>Ankara Metropolitan Municipality</span> <br /> Emniyet, Hipodrom Cd. No:5, 06430 Yenimahalle/Ankara</p>
                     </Card>
                 </Row>

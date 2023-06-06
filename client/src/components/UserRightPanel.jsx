@@ -99,6 +99,8 @@ const UserRightPanel = (props) => {
         user_id: user_id,
         account_id: account_id,
       }
+      }).then(() => {
+        userPageRefresher();
       })
   };
 
@@ -219,7 +221,6 @@ const UserRightPanel = (props) => {
           <Button
             className="update-btn"
             onClick={ async () => {
-              console.log("ANAN", userData)
               await updateUser(userData);
 
             

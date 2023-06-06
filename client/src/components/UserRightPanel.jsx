@@ -1,4 +1,4 @@
-import { Drawer, Cascader, Input, Button, Modal } from "antd";
+import { Drawer, Cascader, Input, Button, Modal, message } from "antd";
 import { useRef, useState } from "react";
 import "../styles/RightPanel.scss";
 import "../styles/Incidents.scss";
@@ -90,6 +90,8 @@ const UserRightPanel = (props) => {
       .catch((e) => {
         console.log(e);
       });
+    
+      message.success("User successfully updated");
   };
   
   const deleteUser = async () => {
@@ -102,6 +104,8 @@ const UserRightPanel = (props) => {
       }).then(() => {
         userPageRefresher();
       })
+
+      message.info("User successfully inactivated");
   };
 
   const isDisabled = userType == "admin" || "super_admin" ? false : true;

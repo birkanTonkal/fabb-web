@@ -101,6 +101,8 @@ const IncidentRightPanel = (props) => {
           incidentPageRefresher()
         }).
         catch(e => {console.log('zart', e)})
+    
+        message.success("Incident successfully updated");
   }
     
   const deleteIncident = (incident_id) => {
@@ -110,6 +112,8 @@ const IncidentRightPanel = (props) => {
     }).catch(e => {
       console.log(e)
     })
+
+    message.info("Incident successfully inactivated");
   }
 
   const isDisabled = userType == 'admin' || 'super_admin' ? false : true;

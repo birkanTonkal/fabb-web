@@ -34,8 +34,8 @@ const StackedBar = (props) => {
 
     obj = { type: key, total: value };
     data.push(obj)
-  }
-  
+  }  
+
   const sortedData = [...data].sort((a, b) => b.total - a.total);
 
   const config = {
@@ -64,7 +64,7 @@ const StackedBar = (props) => {
     },
   };
   
-  return <Column {...config} data={sortedData} />;
+  return <Column {...config} className="stacked-bar" data={sortedData} />;
 };
 
 export default StackedBar;

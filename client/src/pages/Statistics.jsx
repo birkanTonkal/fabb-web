@@ -2,7 +2,7 @@ import { Card, Col, Row, Breadcrumb, Badge } from 'antd';
 import React from 'react';
 import PieChart from '../components/PieChart'
 import StackedBar from '../components/StackedBar'
-import Map from '../components/Map'
+import TopThree from '../components/TopThree'
 import "../styles/Statistics.scss";
 import {
   UsergroupAddOutlined,
@@ -13,110 +13,6 @@ import {
 function Statistics(props) {
 
   const {incidentData, userData} = props;
-  
-  // let super_admin = 0, admin = 0, customer = 0, normal = 0;  
-  // for(let i = 0; i< userData.length; i++) {
-  //   if(userData[i].user_type == "super_admin") {
-  //     super_admin ++;
-  //   }
-  //   else if(userData[i].user_type == "admin") {
-  //     admin ++;
-  //   }
-  //   else if(userData[i].user_type == "customer") {
-  //     customer ++;
-  //   }
-  //   else if(userData[i].user_type == "normal") {
-  //     normal ++;
-  //   }
-  // }
-
-  // const superAdminTitle = <Breadcrumb
-  //   items={[
-  //     {
-  //       href: '',
-  //       title: (
-  //         <>
-  //           <UsergroupAddOutlined />
-  //           <span>Users</span>
-  //         </>
-  //       ),
-  //     },
-  //     {
-  //       title:
-  //       (
-  //         <>
-  //           <Badge status="error" />Super admin 
-  //         </>
-  //       ),
-  //     },
-  //   ]}
-  // />
-
-  // const adminTitle = <Breadcrumb
-  //   items={[
-  //     {
-  //       href: '',
-  //       title: (
-  //         <>
-  //           <UsergroupAddOutlined />
-  //           <span>Users</span>
-  //         </>
-  //       ),
-  //     },
-  //     {
-  //       title:
-  //       (
-  //         <>
-  //           <Badge status="warning" />Admin
-  //         </>
-  //       ),
-  //     },
-  //   ]}
-  // />
-
-  // const customerTitle = <Breadcrumb
-  //   items={[
-  //     {
-  //       href: '',
-  //       title: (
-  //         <>
-  //           <UsergroupAddOutlined />
-  //           <span>Users</span>
-  //         </>
-  //       ),
-  //     },
-  //     {
-  //       title:
-  //       (
-  //         <>
-  //           <Badge status="success" />Customer
-  //         </>
-  //       ),
-  //     },
-  //   ]}
-  // />
-
-  // const normalTitle = <Breadcrumb
-  //   items={[
-  //     {
-  //       href: '',
-  //       title: (
-  //         <>
-  //           <UsergroupAddOutlined />
-  //           <span>Users</span>
-  //         </>
-  //       ),
-  //     },
-  //     {
-  //       title:
-  //       (
-  //         <>
-  //           <Badge status="default" />Normal
-  //         </>
-  //       ),
-  //     },
-  //   ]}
-  // />
 
   const userTitle = <Breadcrumb
     items={[
@@ -143,15 +39,13 @@ function Statistics(props) {
   />
 
   const { Meta } = Card;
-  
-  
+
   return (
     <>
       <Row gutter={[16, 16]} className='row'>
         <Col span={16}>
           <Card><StackedBar incidentData={incidentData}/></Card>          
         </Col>
-
         <Col span={8} className='number-col'>
           <Card>
             <Meta className='statistic'
@@ -171,19 +65,14 @@ function Statistics(props) {
       </Row>
 
       <Row gutter={[16, 16]} className='row'>
-        <Col span={8}>
+        <Col span={12}>
           <Card><PieChart incidentData={incidentData}/></Card>    
+        </Col>       
+        
+        <Col span={12}>
+          <Card className='top-three'><TopThree incidentData={incidentData}/></Card>
         </Col>
-        {/* <Col span={8}>
-          <Card></Card>    
-        </Col>
-        <Col span={8}>
-          <Card><Map/></Card> 
-        </Col> */}
-      </Row>
-
-      
-    
+      </Row>     
     </>
   )
 }

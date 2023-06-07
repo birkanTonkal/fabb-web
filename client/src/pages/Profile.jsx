@@ -41,22 +41,22 @@ function Profile() {
                     <div>
                         <div className='profile-label'>
                             <label>Full Name</label>
-                            <input placeholder={userData.full_name}/>
+                            <input value={userData.full_name}/>
                         </div>
 
                         <div className='profile-label'>
                             <label>Email</label>
-                            <input placeholder={userData.email}/>
+                            <input value={userData.email}/>
                         </div>
 
                         <div className='profile-label'>
                             <label>Phone</label>
-                            <input placeholder={userData.phone_number}/>
+                            <input value={userData.phone_number}/>
                         </div>
 
                         <div className='profile-label'>
                             <label>Date of Birth</label>
-                            <input placeholder={userData.date_of_birth}/>
+                            <input value={userData.date_of_birth}/>
                         </div>
 
                         <div className='profile-label'>
@@ -65,12 +65,12 @@ function Profile() {
                         </div>
                     </div>
 
-                    <div className="button-area">
+                    {/* <div className="button-area">
                         <button className="update-button" type='submit' 
                         onClick={() => {
                             updateUser();
                         }}> Update </button>
-                    </div>
+                    </div> */}
                 </Card>
             </Col>
 

@@ -19,7 +19,7 @@
 }
 
 .number-col :where(.css-dev-only-do-not-override-ph9edi).ant-card .ant-card-body {
-    padding: 45px;
+    padding: 40px;
 }
 
 // .number-col:where(.css-dev-only-do-not-override-ph9edi).ant-col
@@ -39,4 +39,51 @@
 
 .row {
     margin-bottom: 16px;
+}
+
+.stacked-bar {
+    height: 370px !important;
+}
+
+.top-title {
+    font-size: 20px;
+    color: #3a3a3a;
+    letter-spacing: 3px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #afafaf;
+}
+
+.top-three:where(.css-dev-only-do-not-override-ph9edi).ant-card .ant-card-body{
+    padding: 20px 60px 40px 60px;
+    height: 448px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .line {        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #323232;
+
+        .category {
+            font-weight: 500;
+            font-size: 22px;
+            letter-spacing: 0.7px;
+            display: flex;
+            align-items: center;
+
+            span {
+                margin-right: 10px;
+                font-size: 45px;
+                color: #2bc468;
+                text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            }
+        }
+
+        .count {
+            font-weight: 700;            
+            font-size: 25px;
+        }
+    }
 }

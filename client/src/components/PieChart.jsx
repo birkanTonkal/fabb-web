@@ -49,7 +49,7 @@ function PieChart(props) {
     angleField: 'value',
     colorField: 'type',
     color:['#406882','#d9d9d9', '#709aab','#cf2230'],
-    radius: 0.75,
+    radius: 0.78,
     innerRadius: 0.70,
     legend: true,
     label: {
